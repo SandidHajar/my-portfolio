@@ -55,7 +55,7 @@ src/
 
 Let's build something amazing together!
 
-- **LinkedIn**: [((https://www.linkedin.com/in/hajar-sandid-13656b386/))](https://www.linkedin.com/in/hajar-sandid-13656b386/)
+- **LinkedIn**: [Hajar Sandid](https://www.linkedin.com/in/hajar-sandid-13656b386/)
 - **GitHub**: [@SandidHajar](https://github.com/SandidHajar)
 - **Email**: [sandidhajar@gmail.com](mailto:sandidhajar@gmail.com)
 

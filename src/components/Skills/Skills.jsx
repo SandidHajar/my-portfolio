@@ -1,4 +1,5 @@
 import React from 'react';
+import { useLanguage } from '../../context/LanguageContext';
 import { motion } from 'framer-motion';
 import { 
   DiJavascript1, DiReact, DiNodejsSmall
@@ -48,6 +49,21 @@ const skillGroups = [
 ];
 
 const Skills = () => {
+  const { lang } = useLanguage();
+
+  const t = {
+    fr: {
+      title1: "Compétences",
+      title2: "Techniques",
+      subtitle: "Une expertise diversifiée couvrant tout le cycle de développement, du design UI à l'architecture backend et l'intégration d'IA."
+    },
+    en: {
+      title1: "Technical",
+      title2: "Skills",
+      subtitle: "A diversified expertise covering the full development lifecycle, from UI design to backend architecture and AI integration."
+    }
+  };
+
   return (
     <section id="my_skills" className="py-24 bg-[#0f172a] relative overflow-hidden">
       {/* Background decoration */}
@@ -62,10 +78,10 @@ const Skills = () => {
             viewport={{ once: true }}
             className="text-4xl md:text-5xl font-bold text-white mb-4"
           >
-            Compétences <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">Techniques</span>
+            {t[lang].title1} <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">{t[lang].title2}</span>
           </motion.h2>
           <p className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto font-light">
-            Une expertise diversifiée couvrant tout le cycle de développement, du design UI à l'architecture backend et l'intégration d'IA.
+            {t[lang].subtitle}
           </p>
         </div>
 

@@ -1,24 +1,29 @@
 import React from 'react';
-import './App.css';
-
-import Navbar from './components/Navbar/Navbar.jsx';
-import Nav from './components/Nav/Nav.jsx';
-import Section from './components/Section/Section.jsx';
-import Aside from './components/Aside/Aside.js';
-import Skills from './components/Skills/Skills.jsx';
-import Footer from './components/Footer/Footer.jsx';
+import Navbar from './components/Navbar/Navbar';
+import Hero from './components/Nav/Nav';
+import ProjectsGrid from './components/sections/ProjectsGrid';
+import Section from './components/Section/Section';
+import Skills from './components/Skills/Skills';
+import Footer from './components/Footer/Footer';
+import { LanguageProvider } from './context/LanguageContext';
 
 function App() {
   return (
-    <div className="App">
-      <Navbar />
-      <Nav />
-      <Section />
-      <Skills />
-      <Aside />
-      <Footer />
-
-    </div>
+    <LanguageProvider>
+      <div className="bg-[#020617] min-h-screen text-slate-100 selection:bg-violet-500/30">
+        <Navbar />
+        <main>
+          <Hero />
+          {/* Secondary Info Sections */}
+          <div className="space-y-0 relative">
+            <Section />
+            <Skills />
+          </div>
+          <ProjectsGrid />
+        </main>
+        <Footer />
+      </div>
+    </LanguageProvider>
   );
 }
 

@@ -1,0 +1,19 @@
+.App-header {
+  background-color: rgb(2, 2, 2);
+  margin-top: 0;
+  height: 60px;
+}
+
+ul {
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  margin-top: 0;
+  margin-left: 50%;
+}
+
+li {
+  margin-left: 15%;
+  margin-top: 20;
+  color: white;
+}

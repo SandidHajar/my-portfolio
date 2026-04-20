@@ -12,8 +12,8 @@ const Nav = () => {
   const mouseYSpring = useSpring(y);
 
   // Transform position into rotation degrees
-  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["15deg", "-15deg"]);
-  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-15deg", "15deg"]);
+  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["10deg", "-10deg"]);
+  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-10deg", "10deg"]);
 
   const handleMouseMove = (e) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -35,67 +35,56 @@ const Nav = () => {
   };
 
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center py-20 px-4 sm:px-6 relative overflow-hidden text-white" style={{ backgroundColor: '#0f172a' }}>
+    <section id="home" className="flex items-center justify-center py-12 md:py-24 px-4 sm:px-6 relative overflow-hidden text-white" style={{ backgroundColor: '#0a0d1a' }}>
       {/* Background ambient blurs */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-600/30 rounded-full blur-[100px] pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-pink-600/20 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-1/3 right-1/4 w-[500px] h-[500px] bg-pink-600/5 rounded-full blur-[120px] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto w-full flex flex-col-reverse md:flex-row items-center gap-12 z-10 mt-10 md:mt-0">
-        
+      <div className="max-w-7xl mx-auto w-full flex flex-col md:flex-row items-center justify-between gap-12 z-10 pt-8">
+
         {/* Text Content */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, x: -50 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
           viewport={{ once: true }}
-          className="flex-1 space-y-6 text-center md:text-left"
+          className="flex-1 space-y-6 text-left"
         >
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="inline-block px-4 py-1.5 rounded-full border border-purple-500/30 bg-purple-500/10 text-purple-300 font-medium text-sm mb-2"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-purple-500/50 bg-gradient-to-r from-purple-500/10 to-transparent text-purple-200 font-medium text-xs md:text-sm"
           >
-            🚀 Développeuse Full Stack & IA
+            <span role="img" aria-label="rocket">🚀</span> Développeuse Full Stack & IA
           </motion.div>
-          
-          <h1 className="text-4xl md:text-6xl font-bold leading-tight text-white drop-shadow-md">
-            Créons des <br className="hidden md:block" />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500 drop-shadow-sm">
+
+          <h1 className="text-4xl md:text-6xl font-bold leading-[1.15] text-white tracking-tight">
+            Créons des <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-rose-400">
               Applications Web
-            </span><br className="hidden md:block" />
+            </span><br />
             Modernes & Scalables.
           </h1>
-          
-          <p className="text-xl md:text-2xl text-slate-200 leading-relaxed max-w-xl mx-auto md:mx-0 font-light">
+
+          <p className="text-base md:text-lg text-slate-300 leading-relaxed max-w-xl font-light">
             Je suis <strong className="text-white font-bold">Hajar Sandid</strong>, une développeuse passionnée spécialisée dans la conception d'architectures SaaS multi-tenant et l'intégration de solutions d'intelligence artificielle.
           </p>
-          
-          <div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center md:justify-start">
-            <a href="#portfolio" className="px-8 py-3 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-medium hover:scale-105 transition-transform duration-300 shadow-lg shadow-purple-500/25 text-center text-sm md:text-base">
+
+          <div className="flex flex-wrap gap-4 pt-2">
+            <a href="#portfolio" className="px-8 py-3.5 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold hover:opacity-90 transition-all duration-300 shadow-xl shadow-purple-500/20 text-center text-sm">
               Voir mes projets
             </a>
-            <a href="#contact" className="px-8 py-3 rounded-full border border-gray-600 hover:bg-gray-800 text-gray-200 font-medium hover:scale-105 transition-all duration-300 text-center text-sm md:text-base">
+            <a href="#contact" className="px-8 py-3.5 rounded-full border border-slate-700 bg-slate-900/50 hover:bg-slate-800 text-white font-semibold transition-all duration-300 text-center text-sm">
               Contactez-moi
             </a>
           </div>
-
-          <div className="flex gap-8 pt-8 border-t border-gray-800 mt-8 justify-center md:justify-start">
-            <div>
-              <div className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-gray-100 to-gray-400">2+</div>
-              <div className="text-xs text-gray-400 mt-1 uppercase tracking-wider font-semibold">Années d'expérience</div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-gray-100 to-gray-400">10+</div>
-              <div className="text-xs text-gray-400 mt-1 uppercase tracking-wider font-semibold">Projets Réalisés</div>
-            </div>
-          </div>
         </motion.div>
 
-        {/* 3D Interactive Portrait */}
-        <motion.div 
-          className="flex-1 flex justify-center perspective-1000"
-          style={{ perspective: "1000px" }}
+        {/* Hero Image */}
+        <motion.div
+          className="flex-1 flex justify-center md:justify-end perspective-1000"
+          style={{ perspective: "1900px" }}
         >
           <motion.div
             onMouseMove={handleMouseMove}
@@ -105,46 +94,42 @@ const Nav = () => {
               rotateY,
               transformStyle: "preserve-3d",
             }}
-            className="relative w-64 h-64 md:w-[420px] md:h-[420px] cursor-pointer"
+            className="relative w-full max-w-[300px] h-[400px] md:max-w-[420px] md:h-[580px] group"
           >
-            {/* Multi-layered shadows/glows for 3D depth */}
-            <div 
-              style={{ transform: "translateZ(-50px)" }}
-              className="absolute inset-0 bg-gradient-to-tr from-purple-600/40 to-pink-600/40 rounded-full md:rounded-[3rem] blur-2xl animate-pulse" 
-            />
-            
-            {/* The main image card */}
-            <div 
+            {/* Neon Border Glow */}
+            <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-[4rem] blur opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
+
+            {/* Image container */}
+            <div
               style={{ transform: "translateZ(50px)" }}
-              className="relative w-full h-full"
+              className="relative w-full h-full rounded-[4rem] overflow-hidden border border-purple-500/30 shadow-[0_0_30px_rgba(168,85,247,0.2)] bg-slate-900"
             >
-              <img 
-                src={hajar} 
-                alt="Hajar Sandid" 
-                className="w-full h-full object-cover rounded-full md:rounded-[3rem] border-2 border-white/20 shadow-2xl z-10"
+              <img
+                src={hajar}
+                alt="Hajar Sandid"
+                className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
               />
-              
-              {/* Glass glare effect layer */}
-              <div className="absolute inset-0 rounded-full md:rounded-[3rem] bg-gradient-to-tr from-white/10 to-transparent pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-90" />
             </div>
 
-            {/* Floating 'Open to work' badge with even more Z-depth */}
-            <motion.div 
-              style={{ transform: "translateZ(80px)" }}
-              animate={{ y: [0, -10, 0] }}
-              transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
-              className="absolute -bottom-6 -left-6 md:bottom-10 md:-left-10 bg-gray-800/90 backdrop-blur-xl p-4 rounded-2xl border border-white/20 shadow-2xl z-20"
+            {/* Status Badge - Pill Style */}
+            <motion.div
+              style={{ transform: "translateZ(100px)" }}
+              className="absolute -bottom-6 -left-8 md:bottom-16 md:-left-12 bg-slate-900/60 backdrop-blur-xl border border-white/10 p-2.5 px-5 rounded-full shadow-2xl z-20 flex items-center gap-2.5"
             >
-              <div className="flex items-center gap-3">
-                <div className="w-3 h-3 bg-green-500 rounded-full animate-ping absolute" />
-                <div className="w-3 h-3 bg-green-500 rounded-full relative" />
-                <span className="text-sm font-semibold text-white">Open to work</span>
+              <div className="relative flex h-2.5 w-2.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
               </div>
+              <span className="text-[9px] md:text-[11px] font-black text-white tracking-[0.2em] uppercase">Open to work</span>
             </motion.div>
           </motion.div>
         </motion.div>
 
       </div>
+
+      {/* Decorative line at bottom */}
+      <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-slate-800 to-transparent" />
     </section>
   );
 };

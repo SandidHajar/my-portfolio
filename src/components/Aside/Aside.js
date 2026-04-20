@@ -19,6 +19,10 @@ import ImgGenerator from './ProjectsImages/ai-generator-img.png';
 import Freelancer from './ProjectsImages/freelancer.png';
 import Nexora from './ProjectsImages/nexora.png';
 import cats from './ProjectsImages/cats-gellery.jpg';
+import linkedin from './ProjectsImages/automation-v2.png';
+import extractor from './ProjectsImages/data-extractor-v2.png';
+import apiDev from './ProjectsImages/api-dev.png';
+
 export default function Aside() {
   const [selectedProject, setSelectedProject] = useState(null);
 
@@ -61,6 +65,32 @@ export default function Aside() {
       featured: true,
     },
     {
+      title: 'Data Extractor Premium',
+      description: 'Extension Chrome professionnelle pour l’extraction massive de données (emails, téléphones) avec exportation CSV/Excel.',
+      fullDescription: 'Data Extractor est une extension Chrome (Manifest V3) conçue pour la prospection. Elle analyse les pages web en temps réel pour extraire les coordonnées de contact et les organise dans une interface moderne avec export automatisé.',
+      tags: [
+        { name: 'Chrome API', icon: <SiJavascript className="text-[#F7DF1E]" /> },
+        { name: 'JavaScript', icon: <SiJavascript className="text-[#F7DF1E]" /> },
+        { name: 'Glassmorphism UI', icon: <SiTailwindcss className="text-[#06B6D4]" /> }
+      ],
+      image: extractor,
+      link: 'https://github.com/SandidHajar/data-extracting-extention',
+      featured: true,
+    },
+    {
+      title: 'Automation LinkedIn LinkedIn',
+      description: 'Script Tampermonkey pour l’automatisation intelligente des processus de login/signup et remplissage de formulaires.',
+      fullDescription: 'Développement d’un script d’automatisation robuste qui détecte les types de formulaires LinkedIn et remplit dynamiquement les données utilisateurs, optimisant ainsi les workflows répétitifs.',
+      tags: [
+        { name: 'JavaScript', icon: <SiJavascript className="text-[#F7DF1E]" /> },
+        { name: 'Tampermonkey', icon: <SiJavascript className="text-[#F7DF1E]" /> },
+        { name: 'DOM Manipulation', icon: <SiJavascript className="text-[#F7DF1E]" /> }
+      ],
+      image: linkedin,
+      link: 'https://github.com/SandidHajar/Import_Data',
+      featured: false,
+    },
+    {
       title: 'Générateur d\'Images par IA',
       description: 'Application créative utilisant l\'API Gemini Vision pour transformer des prompts en designs uniques. Galerie communautaire et espace personnel.',
       fullDescription: 'Utilisant les dernières avancées en IA générative, cette application permet de créer, sauvegarder et partager des visuels époustouflants. L\'architecture est optimisée pour la rapidité et la scalabilité.',
@@ -74,38 +104,14 @@ export default function Aside() {
       featured: false,
     },
     {
-      title: 'Bot de Chat Intelligent Gemini',
-      description: 'Interface de conversation fluide connectée directement aux modèles Google Gemini pour une assistance en temps réel.',
-      fullDescription: 'Une application de chat minimaliste et performante qui exploite toute la puissance de l\'IA de Google pour répondre, coder et analyser des données en quelques secondes.',
+      title: 'Cats Gallery - Système Full-Stack & API',
+      description: 'Plateforme interactive avec architecture API robuste, testée sous Postman, et gestion complète via TiDB Cloud.',
+      fullDescription: 'Ce projet démontre une approche "Backend-First". Avant l\'interface, j\'ai développé une API REST complète avec Node.js et Express, validée par une suite de tests rigoureuse sur Postman. Le stockage est assuré par TiDB Cloud (Base de données distribuée compatible MySQL).',
       tags: [
-        { name: 'React', icon: <SiReact className="text-[#61DAFB]" /> },
-        { name: 'Google IA', icon: <FaBrain className="text-purple-400" /> }
-      ],
-      image: Gemini,
-      link: 'https://gemini-chat-frontend-tmut.vercel.app/',
-      featured: false,
-    },
-    {
-      title: 'Application Météo Moderne',
-      description: 'Tableau de bord météo interactif avec prévisions précises et visualisation dynamique des conditions climatiques.',
-      fullDescription: 'Une UI épurée utilisant des API météo professionnelles pour fournir des données précises avec des animations basées sur le temps qu\'il fait.',
-      tags: [
-        { name: 'JavaScript', icon: <SiJavascript className="text-[#F7DF1E]" /> },
-        { name: 'Tailwind CSS', icon: <SiTailwindcss className="text-[#06B6D4]" /> }
-      ],
-      image: weather,
-      link: 'https://weather-app-tau-three-50.vercel.app/',
-      featured: false,
-    },
-    {
-      title: 'Cats Gallery - Dashboard CRUD',
-      description: 'Plateforme interactive de gestion avec authentification, recherche filtrée et administration complète sous TiDB Cloud (MySQL compatible).',
-      fullDescription: 'Ce projet démontre la maîtrise du cycle CRUD complet avec une architecture moderne. Il utilise TiDB Cloud, une base de données SQL distribuée compatible MySQL, pour assurer la scalabilité des données. L\'interface arbore un design Glassmorphism unique "Cat Vibe".',
-      tags: [
-        { name: 'Node.js', icon: <SiNodedotjs className="text-[#339933]" /> },
-        { name: 'TiDB Cloud', icon: <HiDatabase className="text-[#4479A1]" /> },
-        { name: 'Express', icon: <SiExpress className="text-white" /> },
-        { name: 'SQL Distributed', icon: <HiShieldCheck className="text-blue-400" /> }
+        { name: 'Node.js & Express', icon: <SiExpress className="text-white" /> },
+        { name: 'Postman API Testing', icon: <HiShieldCheck className="text-orange-400" /> },
+        { name: 'TiDB Cloud (SQL)', icon: <HiDatabase className="text-[#4479A1]" /> },
+        { name: 'CRUD Logic', icon: <FaProjectDiagram className="text-blue-400" /> }
       ],
       image: cats, 
       link: 'https://cats-galery.vercel.app/',

@@ -55,9 +55,9 @@ src/
 
 Let's build something amazing together!
 
-- **LinkedIn**: [Your Profile](https://linkedin.com/in/your-profile)
+- **LinkedIn**: [[Your Profile]([https://linkedin.com/in/your-profile](https://www.linkedin.com/in/hajar-sandid-13656b386/))](https://www.linkedin.com/in/hajar-sandid-13656b386/)
 - **GitHub**: [@SandidHajar](https://github.com/SandidHajar)
-- **Email**: [your.email@example.com](mailto:your.email@example.com)
+- **Email**: [sandidhajar@gmail.com](mailto:sandidhajar@gmail.com)
 
 ---
 

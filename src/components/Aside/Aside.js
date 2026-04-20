@@ -13,15 +13,14 @@ import {
 import { FaBrain, FaProjectDiagram} from 'react-icons/fa';
 import './Aside.css';
 
-import weather from './ProjectsImages/weather-app.png';
-import Gemini from './ProjectsImages/gemini-chat.jpg';
+
 import ImgGenerator from './ProjectsImages/ai-generator-img.png';
 import Freelancer from './ProjectsImages/freelancer.png';
 import Nexora from './ProjectsImages/nexora.png';
 import cats from './ProjectsImages/cats-gellery.jpg';
 import linkedin from './ProjectsImages/automation-v2.png';
 import extractor from './ProjectsImages/data-extractor-v2.png';
-import apiDev from './ProjectsImages/api-dev.png';
+
 
 export default function Aside() {
   const [selectedProject, setSelectedProject] = useState(null);

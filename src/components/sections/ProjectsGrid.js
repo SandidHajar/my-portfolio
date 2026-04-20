@@ -9,7 +9,8 @@ const ProjectsGrid = () => {
   const [selectedId, setSelectedId] = useState(null);
   const { lang } = useLanguage();
   
-  const currentProjects = caseStudies[lang];
+  // Règle d'or du recrutement : "Less is More". On affiche uniquement les projets majeurs.
+  const currentProjects = caseStudies[lang].filter(p => p.featured === true);
   const selectedProject = currentProjects.find(p => p.id === selectedId);
 
   const t = {
@@ -77,35 +78,42 @@ const ProjectsGrid = () => {
               className="group cursor-pointer"
               onClick={() => setSelectedId(project.id)}
             >
-              <div className="glass rounded-[2rem] p-8 h-full flex flex-col transition-all duration-500 group-hover:scale-[1.02] group-hover:border-violet-500/30 group-hover:bg-white/5 shadow-2xl">
-                {/* Tech Icons Row */}
-                <div className="flex gap-4 mb-8">
-                  {project.tech.slice(0, 3).map((T, i) => (
-                    <div key={i} className="text-slate-400 group-hover:text-violet-400 transition-colors">
-                      <T.icon size={28} />
-                    </div>
-                  ))}
+              <div className="glass rounded-[2rem] h-full flex flex-col overflow-hidden transition-all duration-500 group-hover:scale-[1.02] group-hover:border-violet-500/30 group-hover:bg-white/5 shadow-2xl">
+                {/* 1. APERÇU DE L'IMAGE */}
+                <div className="w-full h-48 overflow-hidden relative border-b border-slate-800/50">
+                  <div className="absolute inset-0 bg-slate-900/40 group-hover:bg-transparent transition-colors z-10 pointer-events-none" />
+                  <img 
+                    src={project.image} 
+                    alt={project.title} 
+                    className="w-full h-full object-cover object-top opacity-80 group-hover:opacity-100 transition-all duration-700 group-hover:scale-105"
+                  />
                 </div>
 
-                <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-gradient transition-all">
-                  {project.title}
-                </h3>
-                <p className="text-slate-400 font-light leading-relaxed mb-8 flex-1">
-                  {project.tagline}
-                </p>
+                <div className="p-8 flex flex-col flex-1">
+                  {/* 2. TITRE */}
+                  <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-gradient transition-all">
+                    {project.title}
+                  </h3>
 
-                {/* Metrics Preview */}
-                <div className="grid grid-cols-3 gap-4 mb-8 pt-8 border-t border-slate-800">
-                  {project.metrics.map((m, i) => (
-                    <div key={i} className="flex flex-col">
-                      <span className="text-amber-500 font-bold text-lg">{m.value}</span>
-                      <span className="text-[10px] text-slate-500 uppercase font-bold tracking-tight">{m.label}</span>
-                    </div>
-                  ))}
-                </div>
+                  {/* 3. TECH STACK */}
+                  <div className="text-violet-400 font-bold text-xs tracking-widest uppercase mb-6 flex flex-wrap gap-2">
+                    {project.tech.map(t => t.name).join(' • ')}
+                  </div>
 
-                <div className="flex items-center gap-2 text-white font-bold text-sm tracking-tight pt-4 group-hover:gap-4 transition-all uppercase">
-                  {t[lang].readCase} <HiArrowRight size={18} className="text-violet-500" />
+                  {/* 4. FEATURES BULLET POINTS */}
+                  <ul className="flex-1 space-y-3 mb-8">
+                    {project.features.slice(0, 3).map((f, i) => (
+                      <li key={i} className="flex items-start gap-3">
+                        <span className="text-violet-500 font-bold mt-0.5">-</span>
+                        <span className="text-sm text-slate-300 font-light leading-relaxed">{f}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  {/* Bouton Voir Détails */}
+                  <div className="flex items-center gap-2 text-white font-bold text-sm tracking-tight pt-6 border-t border-slate-800 group-hover:gap-4 transition-all uppercase mt-auto">
+                    {t[lang].readCase} <HiArrowRight size={18} className="text-violet-500" />
+                  </div>
                 </div>
               </div>
             </motion.div>

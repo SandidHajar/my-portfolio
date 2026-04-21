@@ -48,6 +48,31 @@ const skillGroups = [
   }
 ];
 
+const cardVariants = {
+  hidden: { opacity: 0, y: 40, scale: 0.9 },
+  visible: (i) => ({
+    opacity: 1, y: 0, scale: 1,
+    transition: {
+      delay: i * 0.12,
+      duration: 0.6,
+      ease: [0.22, 1, 0.36, 1]
+    }
+  })
+};
+
+const iconVariants = {
+  hidden: { scale: 0, rotate: -20 },
+  visible: (i) => ({
+    scale: 1, rotate: 0,
+    transition: {
+      delay: i * 0.08 + 0.3,
+      type: "spring",
+      stiffness: 260,
+      damping: 15
+    }
+  })
+};
+
 const Skills = () => {
   const { lang } = useLanguage();
 
@@ -66,48 +91,73 @@ const Skills = () => {
 
   return (
     <section id="my_skills" className="py-24 bg-[#0f172a] relative overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-purple-500/5 rounded-full blur-[120px] -z-10" />
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-500/5 rounded-full blur-[120px] -z-10" />
+      {/* Animated glow divider */}
+      <div className="section-glow-line" />
+
+      {/* Background decoration with floating animation */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-purple-500/5 rounded-full blur-[120px] -z-10 float-orb" />
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-500/5 rounded-full blur-[120px] -z-10 float-orb-delayed" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            initial={{ opacity: 0, y: 30, scale: 0.95 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            viewport={{ once: true, margin: "-80px" }}
             className="text-4xl md:text-5xl font-bold text-white mb-4"
           >
             {t[lang].title1} <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">{t[lang].title2}</span>
           </motion.h2>
-          <p className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto font-light">
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto font-light"
+          >
             {t[lang].subtitle}
-          </p>
+          </motion.p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {skillGroups.map((group, groupIndex) => (
             <motion.div
               key={group.category}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: groupIndex * 0.1 }}
-              viewport={{ once: true }}
-              className="bg-gray-900/80 backdrop-blur-xl border border-gray-800 p-6 rounded-3xl hover:border-purple-500/40 transition-all duration-300 shadow-2xl"
+              custom={groupIndex}
+              variants={cardVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-50px" }}
+              className="bg-gray-900/80 backdrop-blur-xl border border-gray-800 p-6 rounded-3xl hover:border-purple-500/40 transition-all duration-300 shadow-2xl glass-shimmer"
             >
-              <h3 className="text-purple-300 font-bold mb-6 text-xl tracking-wide uppercase">
+              <motion.h3 
+                initial={{ opacity: 0, x: -15 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ delay: groupIndex * 0.12 + 0.2, duration: 0.5 }}
+                viewport={{ once: true }}
+                className="text-purple-300 font-bold mb-6 text-xl tracking-wide uppercase"
+              >
                 {group.category}
-              </h3>
+              </motion.h3>
               <div className="space-y-4">
                 {group.skills.map((skill, skillIndex) => (
-                  <div key={skillIndex} className="flex items-center gap-4 group">
+                  <motion.div 
+                    key={skillIndex} 
+                    custom={groupIndex * 4 + skillIndex}
+                    variants={iconVariants}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                    className="flex items-center gap-4 group"
+                  >
                     <div className="text-3xl transition-transform duration-300 group-hover:scale-110">
                       {skill.icon}
                     </div>
                     <span className="text-white font-medium group-hover:text-purple-300 transition-colors duration-300">
                       {skill.name}
                     </span>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
             </motion.div>

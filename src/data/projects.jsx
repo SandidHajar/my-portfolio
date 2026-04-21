@@ -1,10 +1,10 @@
 import { 
   SiReact, SiNodedotjs, SiPostgresql, SiPrisma, 
-  SiTailwindcss,
+  SiTailwindcss, SiTypescript, SiRedis, SiVite,
   SiJavascript, SiExpress, SiGooglecloud, SiSupabase,
 } from 'react-icons/si';
-import { HiDatabase, HiShieldCheck } from 'react-icons/hi';
-import { FaBrain, FaProjectDiagram } from 'react-icons/fa';
+import { HiDatabase, HiShieldCheck, HiOutlineMail, HiLightningBolt } from 'react-icons/hi';
+import { FaBrain, FaProjectDiagram, FaLock, FaChartLine } from 'react-icons/fa';
 
 import NexoraImg from '../components/Aside/ProjectsImages/nexora.png';
 import FreelancerImg from '../components/Aside/ProjectsImages/freelancer.png';
@@ -38,11 +38,39 @@ export const caseStudies = {
         'Stockage cloud optimisé (Cloudinary)'
       ],
       tech: [
-        { name: 'React', icon: SiReact },
-        { name: 'Node.js', icon: SiNodedotjs },
-        { name: 'Prisma', icon: SiPrisma },
-        { name: 'PostgreSQL', icon: SiPostgresql }
+        { name: 'Node.js & Express & TypeScript', icon: SiNodedotjs },
+        { name: 'PostgreSQL & Prisma ORM', icon: SiPostgresql },
+        { name: 'React 18 & Vite & TailwindCSS', icon: SiReact },
+        { name: 'Radix UI / shadcn-ui', icon: SiReact },
+        { name: 'ReactFlow (Workflow Editor)', icon: FaProjectDiagram },
+        { name: 'Recharts (KPI Dashboard)', icon: FaChartLine },
+        { name: 'Groq AI (CV Parsing & Recommendations)', icon: FaBrain },
+        { name: 'Cloudinary (File & PDF Storage)', icon: HiDatabase },
+        { name: 'JWT & Refresh Tokens', icon: FaLock },
+        { name: 'SSE (Real-time Notifications)', icon: HiLightningBolt },
+        { name: 'Nodemailer', icon: HiOutlineMail },
+        { name: 'Redis (ioredis)', icon: SiRedis },
+        { name: 'Zustand & TanStack Query', icon: SiReact },
+        { name: 'React Hook Form & Zod', icon: SiReact }
       ],
+      technicalReasoning: [
+        { label: "Pourquoi Redis ?", value: "Utilisé comme couche de cache haute performance pour les sessions et le queuing des notifications temps réel, réduisant la charge sur PostgreSQL." },
+        { label: "Auth JWT & Refresh Tokens", value: "Implémenté un système d'authentification robuste avec rotation des refresh tokens pour une sécurité maximale en environnement SaaS." },
+        { label: "Architecture TypeScript", value: "Typage strict de bout en bout pour garantir la maintenabilité d'une codebase complexe et réduire les erreurs en production." }
+      ],
+      codeSnippet: `// Workflow Engine Node Logic
+export async function executeWorkflow(cvData: CVData) {
+  const analysis = await groq.parse(cvData);
+  
+  if (analysis.score > 0.8) {
+    await redis.publish('notification', {
+      type: 'TOP_TALENT',
+      candidate: analysis.name
+    });
+  }
+  
+  return prisma.candidate.create({ data: analysis });
+}`,
       image: NexoraImg,
       github: 'https://github.com/SandidHajar',
       demo: 'https://nexora-si.com/'
@@ -219,11 +247,39 @@ export const caseStudies = {
         'Optimized cloud storage (Cloudinary)'
       ],
       tech: [
-        { name: 'React', icon: SiReact },
-        { name: 'Node.js', icon: SiNodedotjs },
-        { name: 'Prisma', icon: SiPrisma },
-        { name: 'PostgreSQL', icon: SiPostgresql }
+        { name: 'Node.js & Express & TypeScript', icon: SiNodedotjs },
+        { name: 'PostgreSQL & Prisma ORM', icon: SiPostgresql },
+        { name: 'React 18 & Vite & TailwindCSS', icon: SiReact },
+        { name: 'Radix UI / shadcn-ui', icon: SiReact },
+        { name: 'ReactFlow (Workflow Editor)', icon: FaProjectDiagram },
+        { name: 'Recharts (KPI Dashboard)', icon: FaChartLine },
+        { name: 'Groq AI (CV Parsing & Recommendations)', icon: FaBrain },
+        { name: 'Cloudinary (File & PDF Storage)', icon: HiDatabase },
+        { name: 'JWT & Refresh Tokens', icon: FaLock },
+        { name: 'SSE (Real-time Notifications)', icon: HiLightningBolt },
+        { name: 'Nodemailer', icon: HiOutlineMail },
+        { name: 'Redis (ioredis)', icon: SiRedis },
+        { name: 'Zustand & TanStack Query', icon: SiReact },
+        { name: 'React Hook Form & Zod', icon: SiReact }
       ],
+      technicalReasoning: [
+        { label: "Why Redis?", value: "Used as a high-performance caching layer for sessions and real-time notification queuing, reducing PostgreSQL load." },
+        { label: "JWT Auth & Refresh", value: "Implemented a robust authentication system with refresh token rotation for maximum security in a SaaS environment." },
+        { label: "TypeScript Architecture", value: "End-to-end strict typing to ensure maintainability of a complex codebase and reduce production errors." }
+      ],
+      codeSnippet: `// Workflow Engine Node Logic
+export async function executeWorkflow(cvData: CVData) {
+  const analysis = await groq.parse(cvData);
+  
+  if (analysis.score > 0.8) {
+    await redis.publish('notification', {
+      type: 'TOP_TALENT',
+      candidate: analysis.name
+    });
+  }
+  
+  return prisma.candidate.create({ data: analysis });
+}`,
       image: NexoraImg,
       github: 'https://github.com/SandidHajar',
       demo: 'https://nexora-si.com/'

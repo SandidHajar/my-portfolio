@@ -118,19 +118,34 @@ const ProjectsGrid = () => {
                     {project.tech.map(t => t.name).join(' • ')}
                   </div>
 
-                  {/* 4. FEATURES BULLET POINTS */}
+                  {/* 4. FEATURES BULLET POINTS - Aéré pour la lisibilité */}
                   <ul className="flex-1 space-y-3 mb-8">
-                    {project.features.slice(0, 3).map((f, i) => (
+                    {project.features.slice(0, 2).map((f, i) => (
                       <li key={i} className="flex items-start gap-3">
-                        <span className="text-violet-500 font-bold mt-0.5">-</span>
-                        <span className="text-sm text-slate-300 font-light leading-relaxed">{f}</span>
+                        <div className="w-1 h-1 rounded-full bg-violet-500 mt-2 shrink-0" />
+                        <span className="text-xs md:text-sm text-slate-400 font-light leading-snug">{f}</span>
                       </li>
                     ))}
                   </ul>
 
-                  {/* Bouton Voir Détails */}
-                  <div className="flex items-center gap-2 text-white font-bold text-sm tracking-tight pt-6 border-t border-slate-800 group-hover:gap-4 transition-all uppercase mt-auto">
-                    {t[lang].readCase} <HiArrowRight size={18} className="text-violet-500" />
+                  {/* Actions Card Footer */}
+                  <div className="flex items-center justify-between pt-6 border-t border-slate-800 mt-auto">
+                    <div className="flex items-center gap-2 text-white font-bold text-[10px] md:text-xs tracking-tight group-hover:gap-3 transition-all uppercase cursor-pointer">
+                      {t[lang].readCase} <HiArrowRight size={16} className="text-violet-500" />
+                    </div>
+                    
+                    {project.github && (
+                      <a 
+                        href={project.github}
+                        target="_blank"
+                        rel="noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        className="p-2 rounded-lg bg-white/5 text-slate-400 hover:text-white hover:bg-white/10 transition-all border border-white/5"
+                        title={t[lang].source}
+                      >
+                        <FaGithub size={18} />
+                      </a>
+                    )}
                   </div>
                 </div>
               </div>
@@ -220,6 +235,40 @@ const ProjectsGrid = () => {
                         ))}
                       </div>
                     </div>
+
+                    {/* NEW: Technical Reasoning Section */}
+                    {selectedProject.technicalReasoning && (
+                      <div className="pt-10 border-t border-slate-800/50">
+                        <h4 className="text-violet-400 font-bold tracking-widest text-[10px] uppercase mb-6">
+                          {lang === 'fr' ? "Décisions Techniques" : "Technical Decisions"}
+                        </h4>
+                        <div className="space-y-6">
+                          {selectedProject.technicalReasoning.map((reason, i) => (
+                            <div key={i} className="bg-slate-900/40 rounded-xl p-5 border border-slate-800/50 hover:border-violet-500/30 transition-colors">
+                              <div className="text-white font-bold mb-2 text-sm">{reason.label}</div>
+                              <p className="text-slate-400 text-sm font-light leading-relaxed">{reason.value}</p>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* NEW: Code Snippet Section */}
+                    {selectedProject.codeSnippet && (
+                      <div className="pt-10 border-t border-slate-800/50">
+                        <h4 className="text-violet-400 font-bold tracking-widest text-[10px] uppercase mb-6">
+                          {lang === 'fr' ? "Implémentation Clé" : "Key Implementation"}
+                        </h4>
+                        <div className="relative group">
+                          <div className="absolute -inset-1 bg-gradient-to-r from-violet-600 to-pink-600 rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
+                          <pre className="relative bg-slate-950 p-6 rounded-2xl border border-slate-800 overflow-x-auto font-mono text-xs md:text-sm text-slate-300 leading-relaxed">
+                            <code className="block">
+                              {selectedProject.codeSnippet}
+                            </code>
+                          </pre>
+                        </div>
+                      </div>
+                    )}
                   </div>
 
                   {/* Right Column: Specs */}

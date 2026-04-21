@@ -20,6 +20,7 @@ const ProjectsGrid = () => {
       mainTitle2: "Détaillées",
       subtitle: "Chaque projet est une exploration rigoureuse de la résolution de problèmes complexes, optimisée pour la performance, la sécurité et la scalabilité.",
       readCase: "Lire l'étude de cas",
+      business: "Impact Métier",
       challenge: "Le Défi",
       solution: "La Solution Technique",
       core: "Cœur Technique",
@@ -34,6 +35,7 @@ const ProjectsGrid = () => {
       mainTitle2: "Work",
       subtitle: "Each project is a rigorous exploration of complex problem-solving, optimized for performance, security, and scalability.",
       readCase: "Read Case Study",
+      business: "Business Value",
       challenge: "The Challenge",
       solution: "The Technical Solution",
       core: "Technical Core",
@@ -82,6 +84,16 @@ const ProjectsGrid = () => {
                 {/* 1. APERÇU DE L'IMAGE */}
                 <div className="w-full h-48 overflow-hidden relative border-b border-slate-800/50">
                   <div className="absolute inset-0 bg-slate-900/40 group-hover:bg-transparent transition-colors z-10 pointer-events-none" />
+                  
+                  {/* Badges Overlay */}
+                  <div className="absolute top-4 right-4 flex gap-2 z-20 pointer-events-none">
+                    {project.badges?.map((badge, idx) => (
+                      <span key={idx} className="bg-slate-950/80 backdrop-blur border border-white/10 text-white text-[9px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg shadow-lg">
+                        {badge}
+                      </span>
+                    ))}
+                  </div>
+
                   <img 
                     src={project.image} 
                     alt={project.title} 
@@ -90,10 +102,16 @@ const ProjectsGrid = () => {
                 </div>
 
                 <div className="p-8 flex flex-col flex-1">
-                  {/* 2. TITRE */}
+                  {/* 2. TITRE & IMPACT */}
                   <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-gradient transition-all">
                     {project.title}
                   </h3>
+                  
+                  {project.shortImpact && (
+                    <p className="text-slate-300 text-sm mt-1 mb-5 font-medium leading-relaxed border-l-2 border-violet-500/50 pl-3">
+                      {project.shortImpact}
+                    </p>
+                  )}
 
                   {/* 3. TECH STACK */}
                   <div className="text-violet-400 font-bold text-xs tracking-widest uppercase mb-6 flex flex-wrap gap-2">
@@ -160,32 +178,47 @@ const ProjectsGrid = () => {
 
                 <div className="flex flex-col lg:flex-row gap-16">
                   {/* Left Column: Context */}
-                  <div className="flex-1 space-y-12">
+                  <div className="flex-1 space-y-10">
                     <div>
-                      <h4 className="text-violet-400 font-bold tracking-widest text-[10px] uppercase mb-4">{t[lang].challenge}</h4>
+                      <h4 className="text-violet-400 font-bold tracking-widest text-[10px] uppercase mb-4">{t[lang].business}</h4>
                       <h2 className="text-4xl font-bold text-white mb-6">{selectedProject.title}</h2>
-                      <p className="text-slate-200 text-lg leading-relaxed font-light italic">
-                        "{selectedProject.problem}"
-                      </p>
-                    </div>
-
-                    <div className="space-y-4">
-                      <h4 className="font-bold text-slate-100 flex items-center gap-2">
-                        <HiShieldCheck size={20} className="text-emerald-400" />
-                        {t[lang].solution}
-                      </h4>
-                      <p className="text-slate-400 font-light leading-relaxed">
-                        {selectedProject.solution}
-                      </p>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                      {selectedProject.features.map((f, i) => (
-                        <div key={i} className="flex items-start gap-3">
-                          <div className="w-1.5 h-1.5 rounded-full bg-violet-600 mt-2 shrink-0" />
-                          <span className="text-sm text-slate-300 font-light leading-snug">{f}</span>
+                      
+                      {selectedProject.businessImpact && (
+                        <div className="bg-violet-900/20 border border-violet-500/20 rounded-2xl p-6 mb-8 shadow-inner">
+                          <p className="text-white text-lg font-medium leading-relaxed">
+                            {selectedProject.businessImpact}
+                          </p>
                         </div>
-                      ))}
+                      )}
+                    </div>
+
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                      <div className="space-y-3">
+                        <h4 className="text-slate-500 font-bold tracking-widest text-[10px] uppercase">{t[lang].challenge}</h4>
+                        <p className="text-slate-400 font-light leading-relaxed text-sm">
+                          {selectedProject.problem}
+                        </p>
+                      </div>
+                      <div className="space-y-3">
+                        <h4 className="text-slate-500 font-bold tracking-widest text-[10px] uppercase flex items-center gap-1.5">
+                          <HiShieldCheck size={16} className="text-emerald-400" />
+                          {t[lang].solution}
+                        </h4>
+                        <p className="text-slate-400 font-light leading-relaxed text-sm">
+                          {selectedProject.solution}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="pt-8 border-t border-slate-800/50">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {selectedProject.features.map((f, i) => (
+                          <div key={i} className="flex items-start gap-3">
+                            <div className="w-1.5 h-1.5 rounded-full bg-violet-600 mt-2 shrink-0" />
+                            <span className="text-sm text-slate-300 font-light leading-snug">{f}</span>
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   </div>
 

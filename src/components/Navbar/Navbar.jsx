@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { HiMenuAlt3, HiX } from 'react-icons/hi';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
-import { useLanguage } from '../../context/LanguageContext';
+import { useTranslation } from 'react-i18next';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { lang, toggleLanguage } = useLanguage();
+  const { t, i18n } = useTranslation();
+  const currentLang = i18n.language.split('-')[0];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,18 +18,35 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const t = {
-    fr: { work: 'Projets', about: 'À propos', education: 'Formations', philosophy: 'Philosophie', contact: 'Contact' },
-    en: { work: 'Work', about: 'About', education: 'Education', philosophy: 'Philosophy', contact: 'Contact' }
+  const navLinks = [
+    { name: t('navbar.work'), href: '#work' },
+    { name: t('navbar.about'), href: '#about' },
+    { name: t('navbar.education'), href: '#education' },
+    { name: t('navbar.skills'), href: '#my_skills' },
+    { name: t('navbar.contact'), href: '#contact' },
+  ];
+
+  const handleLangChange = (lang) => {
+    i18n.changeLanguage(lang);
   };
 
-  const navLinks = [
-    { name: t[lang].work, href: '#work' },
-    { name: t[lang].about, href: '#about' },
-    { name: t[lang].education, href: '#education' },
-    { name: t[lang].philosophy, href: '#philosophy' },
-    { name: t[lang].contact, href: '#contact' },
-  ];
+  const LangSwitcher = ({ className = "" }) => (
+    <div className={`flex items-center gap-1 text-xs font-bold ${className}`}>
+      <button 
+        onClick={() => handleLangChange('en')}
+        className={`px-2 py-1 rounded transition-colors ${currentLang === 'en' ? 'text-white bg-violet-600/40' : 'text-slate-400 hover:text-white hover:bg-white/5'}`}
+      >
+        EN
+      </button>
+      <span className="text-slate-700">|</span>
+      <button 
+        onClick={() => handleLangChange('fr')}
+        className={`px-2 py-1 rounded transition-colors ${currentLang === 'fr' ? 'text-white bg-violet-600/40' : 'text-slate-400 hover:text-white hover:bg-white/5'}`}
+      >
+        FR
+      </button>
+    </div>
+  );
 
   return (
     <nav 
@@ -41,10 +59,15 @@ const Navbar = () => {
           isScrolled ? 'shadow-2xl border-white/5' : 'bg-transparent border-transparent'
         }`}>
           {/* Logo */}
-          <a href="/" className="font-bold text-xl tracking-tighter flex items-center gap-2 group">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-violet-600 to-pink-600 flex items-center justify-center text-white scale-90 group-hover:scale-100 transition-transform">
+          <a href="/" className="font-bold text-xl tracking-tighter flex items-center gap-3 group min-h-[44px]">
+            <div className="w-9 h-9 rounded-xl overflow-hidden border border-white/10 shadow-lg scale-90 group-hover:scale-100 transition-transform duration-300">
+              <img 
+                src="/assets/hs-brand-icon.png" 
+                alt="HS Logo" 
+                className="w-full h-full object-cover"
+              />
             </div>
-            <span className="hidden sm:block text-white">Hajar Sandid</span>
+            <span className="hidden sm:block text-white font-bold tracking-tighter">{t('navbar.name')}</span>
           </a>
 
           {/* Desktop Nav */}
@@ -53,7 +76,7 @@ const Navbar = () => {
               <a 
                 key={link.name}
                 href={link.href}
-                className="text-sm font-medium text-slate-400 hover:text-white transition-colors"
+                className="text-sm font-medium text-slate-400 hover:text-white transition-colors min-h-[44px] flex items-center"
               >
                 {link.name}
               </a>
@@ -61,35 +84,25 @@ const Navbar = () => {
             <div className="h-4 w-px bg-slate-800" />
             <div className="flex items-center gap-4">
               {/* Language Toggle */}
-              <button 
-                onClick={toggleLanguage}
-                className="flex items-center justify-center w-8 h-8 rounded-md bg-white/5 hover:bg-white/10 text-xs font-bold text-white transition-colors border border-white/10 mr-2"
-              >
-                {lang === 'fr' ? 'EN' : 'FR'}
-              </button>
-              
-              <a href="https://github.com/SandidHajar" target="_blank" rel="noreferrer" className="text-slate-400 hover:text-white transition-colors">
+              <LangSwitcher />
+
+              <a href="https://github.com/SandidHajar" target="_blank" rel="noreferrer" className="text-slate-400 hover:text-white transition-colors min-h-[44px] min-w-[44px] md:min-h-auto md:min-w-auto flex items-center justify-center">
                 <FaGithub size={20} />
               </a>
-              <a href="https://www.linkedin.com/in/hajar-sandid-13656b386/" target="_blank" rel="noreferrer" className="text-slate-400 hover:text-white transition-colors">
+              <a href="https://www.linkedin.com/in/hajar-sandid-13656b386/" target="_blank" rel="noreferrer" className="text-slate-400 hover:text-white transition-colors min-h-[44px] min-w-[44px] md:min-h-auto md:min-w-auto flex items-center justify-center">
                 <FaLinkedin size={20} />
               </a>
             </div>
           </div>
 
           {/* Mobile Menu Toggle */}
-          <div className="flex items-center gap-4 md:hidden">
+          <div className="flex items-center gap-2 md:hidden">
+            <LangSwitcher />
             <button 
-              onClick={toggleLanguage}
-              className="flex items-center justify-center w-8 h-8 rounded-md bg-white/5 text-xs font-bold text-white border border-white/10"
-            >
-              {lang === 'fr' ? 'EN' : 'FR'}
-            </button>
-            <button 
-              className="text-slate-400 hover:text-white transition-colors"
+              className="text-slate-400 hover:text-white transition-colors flex items-center justify-center min-w-[44px] min-h-[44px]"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
-              {mobileMenuOpen ? <HiX size={24} /> : <HiMenuAlt3 size={24} />}
+              {mobileMenuOpen ? <HiX size={28} /> : <HiMenuAlt3 size={28} />}
             </button>
           </div>
         </div>
@@ -109,7 +122,7 @@ const Navbar = () => {
                 <a 
                   key={link.name}
                   href={link.href}
-                  className="text-lg font-medium text-slate-300 hover:text-violet-400"
+                  className="text-lg font-medium text-slate-300 hover:text-violet-400 min-h-[44px] flex items-center"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {link.name}
@@ -117,10 +130,10 @@ const Navbar = () => {
               ))}
               <div className="h-px w-full bg-slate-800 my-2" />
               <div className="flex gap-4">
-                <a href="https://github.com/SandidHajar" target="_blank" rel="noreferrer" className="flex-1 py-3 glass rounded-xl flex items-center justify-center text-slate-300">
+                <a href="https://github.com/SandidHajar" target="_blank" rel="noreferrer" className="flex-1 min-h-[48px] glass rounded-xl flex items-center justify-center text-slate-300">
                   <FaGithub size={20} />
                 </a>
-                <a href="https://linkedin.com/in/hajar-sandid" target="_blank" rel="noreferrer" className="flex-1 py-3 glass rounded-xl flex items-center justify-center text-slate-300">
+                <a href="https://www.linkedin.com/in/hajar-sandid-13656b386/" target="_blank" rel="noreferrer" className="flex-1 min-h-[48px] glass rounded-xl flex items-center justify-center text-slate-300">
                   <FaLinkedin size={20} />
                 </a>
               </div>

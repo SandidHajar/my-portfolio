@@ -1,149 +1,92 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { HiOutlineExternalLink, HiX, HiArrowRight, HiShieldCheck } from 'react-icons/hi';
+import React from 'react';
+import { motion } from 'framer-motion';
+import { HiCheckCircle, HiExternalLink } from 'react-icons/hi';
 import { FaGithub } from 'react-icons/fa';
-import { caseStudies } from '../../data/projects';
-import { useLanguage } from '../../context/LanguageContext';
+import { projects } from '../../data/projects';
+import { useTranslation } from 'react-i18next';
 
 const ProjectsGrid = () => {
-  const [selectedId, setSelectedId] = useState(null);
-  const { lang } = useLanguage();
-  
-  // Règle d'or du recrutement : "Less is More". On affiche uniquement les projets majeurs.
-  const currentProjects = caseStudies[lang].filter(p => p.featured === true);
-  const selectedProject = currentProjects.find(p => p.id === selectedId);
+  const { t, i18n } = useTranslation();
+  const lang = i18n.language.split('-')[0];
 
-  const t = {
-    fr: {
-      sectionTitle: "Études de Cas",
-      mainTitle1: "Réalisations Techniques",
-      mainTitle2: "Détaillées",
-      subtitle: "Chaque projet est une exploration rigoureuse de la résolution de problèmes complexes, optimisée pour la performance, la sécurité et la scalabilité.",
-      readCase: "Lire l'étude de cas",
-      business: "Impact Métier",
-      challenge: "Le Défi",
-      solution: "La Solution Technique",
-      core: "Cœur Technique",
-      metrics: "Analyses d'Impact",
-      demo: "Lancer la Démo",
-      source: "Code Source",
-      architecture: "Stratégie d'Architecture"
-    },
-    en: {
-      sectionTitle: "Case Studies",
-      mainTitle1: "Detailed Engineering",
-      mainTitle2: "Work",
-      subtitle: "Each project is a rigorous exploration of complex problem-solving, optimized for performance, security, and scalability.",
-      readCase: "Read Case Study",
-      business: "Business Value",
-      challenge: "The Challenge",
-      solution: "The Technical Solution",
-      core: "Technical Core",
-      metrics: "Impact Analytics",
-      demo: "Launch Demo",
-      source: "Source Code",
-      architecture: "Architecture Strategy"
-    }
-  };
+  // Exclude NEXORA and limit to 2 other projects
+  const displayProjects = (projects[lang] || projects['en'])
+    .filter(p => p.id !== 'nexora')
+    .slice(0, 2);
 
   return (
-    <section id="work" className="py-24 relative">
+    <section id="work" className="py-20 relative">
       <div className="container-premium">
-        {/* Section Header */}
-        <div className="mb-20">
+        <div className="mb-12">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="flex items-center gap-4 mb-4"
+            className="flex items-center gap-4 mb-2"
           >
-            <div className="h-px w-12 bg-violet-500" />
-            <span className="text-violet-500 font-bold uppercase tracking-widest text-xs">{t[lang].sectionTitle}</span>
+            <div className="h-px w-8 bg-violet-500" />
+            <span className="text-violet-500 font-bold uppercase tracking-widest text-[10px]">{t('projects.sectionTitle')}</span>
           </motion.div>
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            {t[lang].mainTitle1} <span className="text-gradient">{t[lang].mainTitle2}</span>
+          <h2 className="text-3xl md:text-4xl font-bold text-white uppercase tracking-tighter">
+            {t('projects.mainTitle1')} <span className="text-gradient">{t('projects.mainTitle2')}</span>
           </h2>
-          <p className="text-slate-400 max-w-xl text-lg font-light">
-            {t[lang].subtitle}
-          </p>
         </div>
 
-        {/* The Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-          {currentProjects.map((project, index) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {displayProjects.map((project, index) => (
             <motion.div
               key={project.id}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="group cursor-pointer"
-              onClick={() => setSelectedId(project.id)}
             >
-              <div className="glass rounded-[2rem] h-full flex flex-col overflow-hidden transition-all duration-500 group-hover:scale-[1.02] group-hover:border-violet-500/30 group-hover:bg-white/5 shadow-2xl">
-                {/* 1. APERÇU DE L'IMAGE */}
-                <div className="w-full h-48 overflow-hidden relative border-b border-slate-800/50">
-                  <div className="absolute inset-0 bg-slate-900/40 group-hover:bg-transparent transition-colors z-10 pointer-events-none" />
-                  
-                  {/* Badges Overlay */}
-                  <div className="absolute top-4 right-4 flex gap-2 z-20 pointer-events-none">
-                    {project.badges?.map((badge, idx) => (
-                      <span key={idx} className="bg-slate-950/80 backdrop-blur border border-white/10 text-white text-[9px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg shadow-lg">
-                        {badge}
-                      </span>
-                    ))}
+              <div className="glass rounded-[2rem] p-8 border border-white/5 bg-white/[0.01] hover:bg-white/[0.03] transition-all h-full flex flex-col">
+                <h3 className="text-xl font-bold text-white mb-6 uppercase tracking-tight">
+                   {project.title}
+                </h3>
+
+                <ul className="space-y-3 mb-8 flex-1">
+                  {project.bullets.slice(0, 3).map((bullet, i) => (
+                    <li key={i} className="flex items-start gap-3">
+                      <HiCheckCircle className="text-emerald-500 mt-1 shrink-0" size={14} />
+                      <span className="text-sm text-slate-400 font-light leading-snug">{bullet}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="pt-6 mt-auto border-t border-white/5 space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">{t('projects.stackLabel')}</span>
+                    <span className="text-[11px] text-violet-300 font-mono text-right max-w-[65%]">{project.stack}</span>
                   </div>
-
-                  <img 
-                    src={project.image} 
-                    alt={project.title} 
-                    className="w-full h-full object-cover object-top opacity-80 group-hover:opacity-100 transition-all duration-700 group-hover:scale-105"
-                  />
-                </div>
-
-                <div className="p-8 flex flex-col flex-1">
-                  {/* 2. TITRE & IMPACT */}
-                  <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-gradient transition-all">
-                    {project.title}
-                  </h3>
-                  
-                  {project.shortImpact && (
-                    <p className="text-slate-300 text-sm mt-1 mb-5 font-medium leading-relaxed border-l-2 border-violet-500/50 pl-3">
-                      {project.shortImpact}
-                    </p>
-                  )}
-
-                  {/* 3. TECH STACK */}
-                  <div className="text-violet-400 font-bold text-xs tracking-widest uppercase mb-6 flex flex-wrap gap-2">
-                    {project.tech.map(t => t.name).join(' • ')}
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">{t('projects.impactLabel')}</span>
+                    <span className="text-[11px] text-emerald-400 font-bold text-right max-w-[65%]">{project.impact}</span>
                   </div>
-
-                  {/* 4. FEATURES BULLET POINTS - Aéré pour la lisibilité */}
-                  <ul className="flex-1 space-y-3 mb-8">
-                    {project.features.slice(0, 2).map((f, i) => (
-                      <li key={i} className="flex items-start gap-3">
-                        <div className="w-1 h-1 rounded-full bg-violet-500 mt-2 shrink-0" />
-                        <span className="text-xs md:text-sm text-slate-400 font-light leading-snug">{f}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  {/* Actions Card Footer */}
-                  <div className="flex items-center justify-between pt-6 border-t border-slate-800 mt-auto">
-                    <div className="flex items-center gap-2 text-white font-bold text-[10px] md:text-xs tracking-tight group-hover:gap-3 transition-all uppercase cursor-pointer">
-                      {t[lang].readCase} <HiArrowRight size={16} className="text-violet-500" />
-                    </div>
-                    
+                  
+                  {/* Action Buttons */}
+                  <div className="flex gap-3 pt-4">
+                    {project.demo && (
+                      <a 
+                        href={project.demo} 
+                        target="_blank" 
+                        rel="noreferrer"
+                        className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl bg-violet-500/10 border border-violet-500/20 text-violet-300 text-xs font-bold hover:bg-violet-500 hover:text-white transition-all group"
+                      >
+                        <HiExternalLink size={14} className="group-hover:scale-110 transition-transform" />
+                        Live Demo
+                      </a>
+                    )}
                     {project.github && (
                       <a 
-                        href={project.github}
-                        target="_blank"
+                        href={project.github} 
+                        target="_blank" 
                         rel="noreferrer"
-                        onClick={(e) => e.stopPropagation()}
-                        className="p-2 rounded-lg bg-white/5 text-slate-400 hover:text-white hover:bg-white/10 transition-all border border-white/5"
-                        title={t[lang].source}
+                        className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl bg-white/5 border border-white/10 text-slate-300 text-xs font-bold hover:bg-white/10 hover:text-white transition-all group"
                       >
-                        <FaGithub size={18} />
+                        <FaGithub size={14} className="group-hover:scale-110 transition-transform" />
+                        Code Source
                       </a>
                     )}
                   </div>
@@ -153,187 +96,6 @@ const ProjectsGrid = () => {
           ))}
         </div>
       </div>
-
-      {/* Case Study Modal */}
-      <AnimatePresence>
-        {selectedId && selectedProject && (
-          <div className="fixed inset-0 z-[200] flex items-center justify-center p-4">
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setSelectedId(null)}
-              className="absolute inset-0 bg-slate-950/95 backdrop-blur-md"
-            />
-            
-            <motion.div
-              layoutId={selectedId}
-              initial={{ scale: 0.95, opacity: 0, y: 40 }}
-              animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.95, opacity: 0, y: 40 }}
-              className="relative w-full max-w-5xl glass rounded-[2.5rem] overflow-hidden max-h-[90vh] overflow-y-auto"
-            >
-              <button 
-                onClick={() => setSelectedId(null)}
-                className="absolute top-6 right-6 p-2 glass hover:bg-red-500/20 text-white rounded-full transition-all z-10"
-              >
-                <HiX size={24} />
-              </button>
-
-              <div className="p-10 md:p-16">
-                {/* Project Image Header */}
-                <div className="w-full h-48 md:h-72 rounded-[2rem] overflow-hidden mb-12 border border-white/5 relative group/modal-img">
-                  <img 
-                    src={selectedProject.image} 
-                    alt={selectedProject.title}
-                    className="w-full h-auto object-top transition-transform duration-[8000ms] hover:-translate-y-[calc(100%-18rem)] md:hover:-translate-y-[calc(100%-25rem)] ease-linear"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/50 to-transparent pointer-events-none" />
-                </div>
-
-                <div className="flex flex-col lg:flex-row gap-16">
-                  {/* Left Column: Context */}
-                  <div className="flex-1 space-y-10">
-                    <div>
-                      <h4 className="text-violet-400 font-bold tracking-widest text-[10px] uppercase mb-4">{t[lang].business}</h4>
-                      <h2 className="text-4xl font-bold text-white mb-6">{selectedProject.title}</h2>
-                      
-                      {selectedProject.businessImpact && (
-                        <div className="bg-violet-900/20 border border-violet-500/20 rounded-2xl p-6 mb-8 shadow-inner">
-                          <p className="text-white text-lg font-medium leading-relaxed">
-                            {selectedProject.businessImpact}
-                          </p>
-                        </div>
-                      )}
-                    </div>
-
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                      <div className="space-y-3">
-                        <h4 className="text-slate-500 font-bold tracking-widest text-[10px] uppercase">{t[lang].challenge}</h4>
-                        <p className="text-slate-400 font-light leading-relaxed text-sm">
-                          {selectedProject.problem}
-                        </p>
-                      </div>
-                      <div className="space-y-3">
-                        <h4 className="text-slate-500 font-bold tracking-widest text-[10px] uppercase flex items-center gap-1.5">
-                          <HiShieldCheck size={16} className="text-emerald-400" />
-                          {t[lang].solution}
-                        </h4>
-                        <p className="text-slate-400 font-light leading-relaxed text-sm">
-                          {selectedProject.solution}
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="pt-8 border-t border-slate-800/50">
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        {selectedProject.features.map((f, i) => (
-                          <div key={i} className="flex items-start gap-3">
-                            <div className="w-1.5 h-1.5 rounded-full bg-violet-600 mt-2 shrink-0" />
-                            <span className="text-sm text-slate-300 font-light leading-snug">{f}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* NEW: Technical Reasoning Section */}
-                    {selectedProject.technicalReasoning && (
-                      <div className="pt-10 border-t border-slate-800/50">
-                        <h4 className="text-violet-400 font-bold tracking-widest text-[10px] uppercase mb-6">
-                          {lang === 'fr' ? "Décisions Techniques" : "Technical Decisions"}
-                        </h4>
-                        <div className="space-y-6">
-                          {selectedProject.technicalReasoning.map((reason, i) => (
-                            <div key={i} className="bg-slate-900/40 rounded-xl p-5 border border-slate-800/50 hover:border-violet-500/30 transition-colors">
-                              <div className="text-white font-bold mb-2 text-sm">{reason.label}</div>
-                              <p className="text-slate-400 text-sm font-light leading-relaxed">{reason.value}</p>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-
-                    {/* NEW: Code Snippet Section */}
-                    {selectedProject.codeSnippet && (
-                      <div className="pt-10 border-t border-slate-800/50">
-                        <h4 className="text-violet-400 font-bold tracking-widest text-[10px] uppercase mb-6">
-                          {lang === 'fr' ? "Implémentation Clé" : "Key Implementation"}
-                        </h4>
-                        <div className="relative group">
-                          <div className="absolute -inset-1 bg-gradient-to-r from-violet-600 to-pink-600 rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
-                          <pre className="relative bg-slate-950 p-6 rounded-2xl border border-slate-800 overflow-x-auto font-mono text-xs md:text-sm text-slate-300 leading-relaxed">
-                            <code className="block">
-                              {selectedProject.codeSnippet}
-                            </code>
-                          </pre>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Right Column: Specs */}
-                  <div className="lg:w-[320px] space-y-12">
-                     <div className="glass p-8 rounded-[2rem] border-white/5 space-y-8">
-                        <div>
-                          <h4 className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-6 border-b border-slate-800 pb-2">{t[lang].core}</h4>
-                          <div className="flex flex-wrap gap-4">
-                            {selectedProject.tech.map((T, i) => (
-                              <div key={i} className="flex flex-col items-center gap-1 group/icon">
-                                <div className="p-3 glass rounded-xl text-slate-400 group-hover/icon:text-white transition-colors">
-                                  <T.icon size={24} />
-                                </div>
-                                <span className="text-[9px] text-slate-600 font-bold uppercase">{T.name}</span>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-
-                        <div>
-                          <h4 className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-6 border-b border-slate-800 pb-2">{t[lang].metrics}</h4>
-                          <div className="space-y-6">
-                            {selectedProject.metrics.map((m, i) => (
-                              <div key={i}>
-                                <div className="text-2xl font-bold text-white tracking-tighter">{m.value}</div>
-                                <div className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">{m.label}</div>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                     </div>
-
-                     <div className="space-y-4">
-                        <a 
-                          href={selectedProject.demo} 
-                          target="_blank" 
-                          rel="noreferrer"
-                          className="flex items-center justify-center gap-3 w-full py-4 bg-white text-black font-bold rounded-2xl hover:bg-slate-200 transition-all"
-                        >
-                          {t[lang].demo} <HiOutlineExternalLink size={20} />
-                        </a>
-                        <a 
-                          href={selectedProject.github} 
-                          target="_blank" 
-                          rel="noreferrer"
-                          className="flex items-center justify-center gap-3 w-full py-4 glass text-white font-bold rounded-2xl hover:bg-white/5 transition-all outline outline-1 outline-white/10"
-                        >
-                          {t[lang].source} <FaGithub size={20} />
-                        </a>
-                     </div>
-                  </div>
-                </div>
-
-                {/* Architecture Note */}
-                <div className="mt-16 pt-12 border-t border-slate-900">
-                  <h4 className="text-[10px] font-bold text-slate-500 uppercase tracking-[.25em] mb-4">{t[lang].architecture}</h4>
-                  <p className="text-sm text-slate-400 font-light max-w-3xl leading-relaxed">
-                    {selectedProject.architecture}
-                  </p>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
     </section>
   );
 };

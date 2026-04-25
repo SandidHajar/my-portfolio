@@ -1,7 +1,8 @@
-import { 
-  SiReact, SiNodedotjs, SiPostgresql, SiPrisma, 
+import {
+  SiReact, SiNodedotjs, SiPostgresql, SiPrisma,
   SiTailwindcss, SiTypescript, SiRedis, SiVite,
   SiJavascript, SiExpress, SiGooglecloud, SiSupabase,
+  SiLaravel, SiPhp, SiMysql, SiFramer
 } from 'react-icons/si';
 import { HiDatabase, HiShieldCheck, HiOutlineMail, HiLightningBolt } from 'react-icons/hi';
 import { FaBrain, FaProjectDiagram, FaLock, FaChartLine } from 'react-icons/fa';
@@ -13,95 +14,55 @@ import AutomationImg from '../components/Aside/ProjectsImages/automation-v2.png'
 import ImgGenImg from '../components/Aside/ProjectsImages/ai-generator-img.png';
 import CatsImg from '../components/Aside/ProjectsImages/cats-gellery.jpg';
 
-export const caseStudies = {
-  fr: [
+export const projects = {
+  en: [
     {
       id: 'nexora',
-      title: 'NEXORA - SaaS RH IA',
-      shortImpact: "Réduit de 80% le temps de tri des CV grâce à l'analyse sémantique IA.",
-      businessImpact: "Permet aux équipes RH de se concentrer sur l'humain plutôt que sur l'administratif, accélérant drastiquement le Time-to-Hire.",
-      badges: ["SaaS", "IA Propulsée", "En direct"],
-      tagline: 'Architecture SaaS multi-tenant avec moteur de workflows BPMS.',
+      title: 'NEXORA — AI-Driven HR SaaS',
+      description: 'Enterprise-grade multi-tenant SaaS for automated recruitment workflows.',
       featured: true,
-      problem: 'La gestion des RH en entreprise souffre de processus manuels lents.',
-      solution: 'Plateforme intégrant IA (LLM) et BPMS pour automatiser les workflows.',
-      architecture: 'Architecture scalable multi-tenant avec Node.js et PostgreSQL.',
-      metrics: [
-        { label: 'CV Analysis', value: '< 2s' },
-        { label: 'Workflows', value: 'BPMS' },
-        { label: 'Isolation', value: '100%' }
+      problem: 'Enterprise HR teams struggle with massive volumes of CVs and slow manual screening processes.',
+      solution: 'A BPMS-powered platform using semantic AI to parse, rank, and automate candidate workflows.',
+      impact: '80% reduction in CV screening time',
+      bullets: [
+        'Semantic CV parsing via Groq AI & LLMs',
+        'Dynamic BPMS engine for custom hiring workflows',
+        'Real-time notifications via Server-Sent Events (SSE)'
       ],
-      features: [
-        'Analyse sémantique de CV via IA Groq',
-        'Moteur de processus métier (BPMS) dynamique',
-        'Notifications en temps réel via SSE',
-        'Stockage cloud optimisé (Cloudinary)'
-      ],
+      stack: 'React, Node.js, TypeScript, PostgreSQL, Redis, Groq AI',
       tech: [
-        { name: 'Node.js & Express & TypeScript', icon: SiNodedotjs },
-        { name: 'PostgreSQL & Prisma ORM', icon: SiPostgresql },
-        { name: 'React 18 & Vite & TailwindCSS', icon: SiReact },
-        { name: 'Radix UI / shadcn-ui', icon: SiReact },
-        { name: 'ReactFlow (Workflow Editor)', icon: FaProjectDiagram },
-        { name: 'Recharts (KPI Dashboard)', icon: FaChartLine },
-        { name: 'Groq AI (CV Parsing & Recommendations)', icon: FaBrain },
-        { name: 'Cloudinary (File & PDF Storage)', icon: HiDatabase },
-        { name: 'JWT & Refresh Tokens', icon: FaLock },
-        { name: 'SSE (Real-time Notifications)', icon: HiLightningBolt },
-        { name: 'Nodemailer', icon: HiOutlineMail },
-        { name: 'Redis (ioredis)', icon: SiRedis },
-        { name: 'Zustand & TanStack Query', icon: SiReact },
-        { name: 'React Hook Form & Zod', icon: SiReact }
+        { name: 'Node.js', icon: SiNodedotjs },
+        { name: 'TypeScript', icon: SiTypescript },
+        { name: 'PostgreSQL', icon: SiPostgresql },
+        { name: 'Redis', icon: SiRedis },
+        { name: 'Groq AI', icon: FaBrain }
       ],
-      technicalReasoning: [
-        { label: "Pourquoi Redis ?", value: "Utilisé comme couche de cache haute performance pour les sessions et le queuing des notifications temps réel, réduisant la charge sur PostgreSQL." },
-        { label: "Auth JWT & Refresh Tokens", value: "Implémenté un système d'authentification robuste avec rotation des refresh tokens pour une sécurité maximale en environnement SaaS." },
-        { label: "Architecture TypeScript", value: "Typage strict de bout en bout pour garantir la maintenabilité d'une codebase complexe et réduire les erreurs en production." }
+      metrics: [
+        { label: 'CV Parsing', value: '< 2s' },
+        { label: 'Workflow Efficiency', value: '+80%' },
+        { label: 'Uptime', value: '99.9%' }
       ],
-      codeSnippet: `// Workflow Engine Node Logic
-export async function executeWorkflow(cvData: CVData) {
-  const analysis = await groq.parse(cvData);
-  
-  if (analysis.score > 0.8) {
-    await redis.publish('notification', {
-      type: 'TOP_TALENT',
-      candidate: analysis.name
-    });
-  }
-  
-  return prisma.candidate.create({ data: analysis });
-}`,
       image: NexoraImg,
       github: 'https://github.com/SandidHajar',
       demo: 'https://nexora-si.com/'
     },
     {
       id: 'freelancer-saas',
-      title: 'SaaS Gestion Freelance',
-      shortImpact: "Automatise le suivi des prestataires et la gestion des flux de communication.",
-      businessImpact: "Centralise le flux de facturation et divise par 3 le temps de traitement administratif pour la gestion de collaborateurs externes.",
-      badges: ["SaaS", "Automatisation", "En direct"],
-      tagline: 'Pilotage de collaborateurs tiers et automatisation n8n.',
+      title: 'Freelance Management SaaS',
+      description: 'Centralized platform for tracking and automating external contractor workflows.',
       featured: true,
-      problem: 'Le suivi des missions et de la facturation des prestataires externes est fragmenté.',
-      solution: 'Tableau de bord avec chatbot automatisé n8n et synchronisation en temps réel.',
-      architecture: 'Intégration d\'API avec automatisation low-code pour un déploiement rapide.',
-      metrics: [
-        { label: 'Automation', value: 'n8n' },
-        { label: 'Support', value: 'Chatbot' },
-        { label: 'Database', value: 'Postgres' }
+      impact: '3x faster administrative processing',
+      bullets: [
+        'Automated n8n chatbot for instant contractor support',
+        'Real-time mission tracking and invoicing pipeline',
+        'Granular permission management for team leads'
       ],
-      features: [
-        'Chatbot intelligent pour le support tiers',
-        'Workflows d\'automatisation logicielle',
-        'Gestion granulaire des missions freelance',
-        'Dashboard analytique en temps réel'
-      ],
+      stack: 'React, Node.js, PostgreSQL, n8n',
       tech: [
         { name: 'React', icon: SiReact },
-        { name: 'n8n Logic', icon: FaProjectDiagram },
         { name: 'Node.js', icon: SiNodedotjs },
-        { name: 'PostgreSQL', icon: SiPostgresql }
+        { name: 'PostgreSQL', icon: SiPostgresql },
+        { name: 'n8n', icon: FaProjectDiagram }
       ],
       image: FreelancerImg,
       github: 'https://github.com/SandidHajar',
@@ -110,27 +71,17 @@ export async function executeWorkflow(cvData: CVData) {
     {
       id: 'data-extractor',
       title: 'Data Extractor Premium',
-      shortImpact: "Génère instantanément des bases de prospects (leads) en un seul clic.",
-      businessImpact: "Élimine des heures de recherche manuelle pour les commerciaux, multipliant le volume de prospection sortante (Outbound).",
-      badges: ["Extension V3", "B2B", "Production"],
-      tagline: 'Extension Chrome V3 pour l’extraction massive de données.',
+      description: 'Chrome Manifest V3 extension for automated B2B lead generation.',
       featured: true,
-      problem: 'La prospection nécessite des heures de recherche pour sourcer des contacts.',
-      solution: 'Extension Chrome extrayant intelligemment emails, téléphones et réseaux sociaux.',
-      architecture: 'Manifest V3 avec Content Scripts et Scripting API pour exécution sécurisée.',
-      metrics: [
-        { label: 'Extraction', value: 'Vitesse' },
-        { label: 'Manifest', value: 'V3' },
-        { label: 'Export', value: 'CSV/Excel' }
+      impact: '1000+ leads extracted per hour',
+      bullets: [
+        'Semantic extraction of emails, phones, and social links',
+        'Instant export to CSV/Excel for sales pipelines',
+        'Secure Manifest V3 isolated execution'
       ],
-      features: [
-        'Extraction sémantique d\'emails et téléphones',
-        'Interface moderne en Glassmorphism',
-        'Exportation instantanée vers Excel',
-        'Détection automatique des liens sociaux'
-      ],
+      stack: 'JavaScript (V3), Chrome APIs, TailwindCSS',
       tech: [
-        { name: 'JS V3', icon: SiJavascript },
+        { name: 'JavaScript', icon: SiJavascript },
         { name: 'Chrome API', icon: SiJavascript },
         { name: 'TailwindCSS', icon: SiTailwindcss }
       ],
@@ -139,52 +90,17 @@ export async function executeWorkflow(cvData: CVData) {
       demo: 'https://github.com/SandidHajar/data-extracting-extention'
     },
     {
-      id: 'automation-intel',
-      title: 'Automation Intelligence',
-      tagline: 'Scripts Tampermonkey pour l’importation de données cross-domain.',
-      featured: false,
-      problem: 'Le transfert de données entre sites web incompatibles ralentit les processus de saisie de formulaires répétitifs.',
-      solution: 'Un système d\'automatisation utilisant le stockage local pour persister des identités fictives et les injecter intelligemment dans des formulaires.',
-      architecture: 'Scripts de haut niveau gérant la synchronisation des données persistantes à travers plusieurs onglets et domaines.',
-      metrics: [
-        { label: 'Workflow', value: '+90%' },
-        { label: 'Vitesse', value: 'Auto' },
-        { label: 'Sécurité', value: 'Local' }
-      ],
-      features: [
-        'Transfert de données cross-domain sécurisé',
-        'Remplissage automatique de formulaires complexes',
-        'Génération dynamique de mots de passe',
-        'Notifications visuelles d\'état d\'avancement'
-      ],
-      tech: [
-        { name: 'JavaScript', icon: SiJavascript },
-        { name: 'DOM Logic', icon: HiShieldCheck },
-        { name: 'Persistence', icon: HiDatabase }
-      ],
-      image: AutomationImg,
-      github: 'https://github.com/SandidHajar/Import_Data',
-      demo: 'https://github.com/SandidHajar/Import_Data'
-    },
-    {
       id: 'ai-gen',
-      title: 'Générateur d’Images IA',
-      tagline: 'Application créative exploitant l’API Gemini Vision.',
+      title: 'AI Image Generator',
+      description: 'Full-stack creative application leveraging state-of-the-art vision models.',
       featured: false,
-      problem: 'La création de visuels personnalisés à partir de descriptions textuelles nécessite souvent des outils complexes et coûteux.',
-      solution: 'Une interface épurée permettant de transformer des prompts en designs uniques avec une galerie communautaire de partage.',
-      architecture: 'Application serverless utilisant Vercel et Supabase pour une scalabilité immédiate et une réactivité optimale.',
-      metrics: [
-        { label: 'IA API', icon: FaBrain },
-        { label: 'Model', value: 'Gemini' },
-        { label: 'Cloud', value: 'Vercel' }
+      impact: 'Sub-second generation latency',
+      bullets: [
+        'Prompt-to-image transformation via Gemini Vision API',
+        'Community gallery with real-time sharing via Supabase',
+        'Optimized API cost management and rate limiting'
       ],
-      features: [
-        'Génération d\'images par prompt textuel',
-        'Galerie persistante via Supabase',
-        'Partage communautaire instantané',
-        'Optimisation des coûts d\'API'
-      ],
+      stack: 'React, Gemini API, Supabase, Vercel',
       tech: [
         { name: 'React', icon: SiReact },
         { name: 'Gemini API', icon: SiGooglecloud },
@@ -197,22 +113,15 @@ export async function executeWorkflow(cvData: CVData) {
     {
       id: 'cats-gallery',
       title: 'Cats Gallery Full-Stack',
-      tagline: 'Système CRUD complet avec API REST et DB TiDB.',
+      description: 'High-performance CRUD application demonstrating database architecture.',
       featured: false,
-      problem: 'Démontrer la maîtrise du cycle complet de développement, de la conception API aux validations de données en base.',
-      solution: 'Un tableau de bord interactif gérant des données structurées, testé rigoureusement via Postman pour assurer la fiabilité.',
-      architecture: 'Environnement distribué utilisant TiDB Cloud pour garantir l\'intégrité des données à grande échelle.',
-      metrics: [
-        { label: 'Backend', value: 'Node/Express' },
-        { label: 'Testing', value: 'Postman' },
-        { label: 'SQL', value: 'TiDB' }
+      impact: 'Fully relational data integrity',
+      bullets: [
+        'Complete CRUD lifecycle with secure REST endpoints',
+        'High-performance SQL connection via TiDB Cloud',
+        'Rigorous API testing via Postman suites'
       ],
-      features: [
-        'Cycle CRUD complet et sécurisé',
-        'Tests d\'endpoints via Postman',
-        'Interface responsive moderne',
-        'Connexion SQL Cloud haute performance'
-      ],
+      stack: 'Node.js, Express, TiDB Cloud',
       tech: [
         { name: 'Node.js', icon: SiNodedotjs },
         { name: 'Express', icon: SiExpress },
@@ -223,94 +132,54 @@ export async function executeWorkflow(cvData: CVData) {
       demo: 'https://cats-galery.vercel.app/'
     }
   ],
-  en: [
+  fr: [
     {
       id: 'nexora',
-      title: 'NEXORA - AI HR SaaS',
-      shortImpact: "Drastically reduces CV screening time by 80% using semantic AI parsing.",
-      businessImpact: "Enables HR teams to focus on human connection rather than admin tasks, massively accelerating the Time-to-Hire metrics.",
-      badges: ["SaaS", "AI Powered", "Live"],
-      tagline: 'Multi-tenant SaaS Architecture with BPMS Workflow Engine.',
+      title: 'NEXORA — SaaS RH Propulsé par l\'IA',
+      description: 'SaaS multi-tenant de classe entreprise pour l\'automatisation du recrutement.',
       featured: true,
-      problem: 'Enterprise HR suffers from slow manual processes for CV screening.',
-      solution: 'Platform integrating LLMs and a BPMS engine to fully automate workflows.',
-      architecture: 'Scalable isolated multi-tenant architecture with Node.js & PostgreSQL.',
-      metrics: [
-        { label: 'CV Analysis', value: '< 2s' },
-        { label: 'Workflows', value: 'BPMS' },
-        { label: 'Isolation', value: '100%' }
+      problem: 'Les équipes RH luttent contre des volumes massifs de CV et des processus de tri manuels lents.',
+      solution: 'Une plateforme basée sur BPMS utilisant l\'IA sémantique pour analyser et classer les candidats.',
+      impact: 'Réduction de 80% du temps de tri des CV',
+      bullets: [
+        'Analyse sémantique de CV via Groq AI & LLMs',
+        'Moteur BPMS dynamique pour des flux de recrutement personnalisés',
+        'Notifications en temps réel via Server-Sent Events (SSE)'
       ],
-      features: [
-        'Semantic CV parsing via Groq AI',
-        'Dynamic Business Process Management (BPMS)',
-        'Real-time notifications via SSE',
-        'Optimized cloud storage (Cloudinary)'
-      ],
+      stack: 'React, Node.js, TypeScript, PostgreSQL, Redis, Groq AI',
       tech: [
-        { name: 'Node.js & Express & TypeScript', icon: SiNodedotjs },
-        { name: 'PostgreSQL & Prisma ORM', icon: SiPostgresql },
-        { name: 'React 18 & Vite & TailwindCSS', icon: SiReact },
-        { name: 'Radix UI / shadcn-ui', icon: SiReact },
-        { name: 'ReactFlow (Workflow Editor)', icon: FaProjectDiagram },
-        { name: 'Recharts (KPI Dashboard)', icon: FaChartLine },
-        { name: 'Groq AI (CV Parsing & Recommendations)', icon: FaBrain },
-        { name: 'Cloudinary (File & PDF Storage)', icon: HiDatabase },
-        { name: 'JWT & Refresh Tokens', icon: FaLock },
-        { name: 'SSE (Real-time Notifications)', icon: HiLightningBolt },
-        { name: 'Nodemailer', icon: HiOutlineMail },
-        { name: 'Redis (ioredis)', icon: SiRedis },
-        { name: 'Zustand & TanStack Query', icon: SiReact },
-        { name: 'React Hook Form & Zod', icon: SiReact }
+        { name: 'Node.js', icon: SiNodedotjs },
+        { name: 'TypeScript', icon: SiTypescript },
+        { name: 'PostgreSQL', icon: SiPostgresql },
+        { name: 'Redis', icon: SiRedis },
+        { name: 'Groq AI', icon: FaBrain }
       ],
-      technicalReasoning: [
-        { label: "Why Redis?", value: "Used as a high-performance caching layer for sessions and real-time notification queuing, reducing PostgreSQL load." },
-        { label: "JWT Auth & Refresh", value: "Implemented a robust authentication system with refresh token rotation for maximum security in a SaaS environment." },
-        { label: "TypeScript Architecture", value: "End-to-end strict typing to ensure maintainability of a complex codebase and reduce production errors." }
+      metrics: [
+        { label: 'Analyse CV', value: '< 2s' },
+        { label: 'Efficacité Flux', value: '+80%' },
+        { label: 'Disponibilité', value: '99.9%' }
       ],
-      codeSnippet: `// Workflow Engine Node Logic
-export async function executeWorkflow(cvData: CVData) {
-  const analysis = await groq.parse(cvData);
-  
-  if (analysis.score > 0.8) {
-    await redis.publish('notification', {
-      type: 'TOP_TALENT',
-      candidate: analysis.name
-    });
-  }
-  
-  return prisma.candidate.create({ data: analysis });
-}`,
       image: NexoraImg,
       github: 'https://github.com/SandidHajar',
       demo: 'https://nexora-si.com/'
     },
     {
       id: 'freelancer-saas',
-      title: 'Freelance Management SaaS',
-      shortImpact: "Automates third-party tracking and streamlines the communication pipeline.",
-      businessImpact: "Centralizes the invoicing flow and slashes admin processing time by 3x for external workforce management.",
-      badges: ["SaaS", "Automation", "Live"],
-      tagline: 'Third-party collaborator tracking and n8n automation.',
+      title: 'SaaS Gestion Freelance',
+      description: 'Plateforme centralisée pour le suivi et l\'automatisation des prestataires externes.',
       featured: true,
-      problem: 'Tracking and invoicing external contractors is heavily fragmented.',
-      solution: 'Dashboard tracking with automated n8n chatbot logic and real-time syncing.',
-      architecture: 'Deep API integration mapped with robust low-code automation nodes.',
-      metrics: [
-        { label: 'Automation', value: 'n8n' },
-        { label: 'Support', value: 'Chatbot' },
-        { label: 'Database', value: 'Postgres' }
+      impact: 'Traitement administratif 3x plus rapide',
+      bullets: [
+        'Chatbot n8n automatisé pour le support instantané des prestataires',
+        'Suivi des missions et pipeline de facturation en temps réel',
+        'Gestion granulaire des permissions pour les chefs d\'équipe'
       ],
-      features: [
-        'Intelligent chatbot for third-party support',
-        'Software automation workflows',
-        'Granular freelance mission management',
-        'Real-time analytical dashboard'
-      ],
+      stack: 'React, Node.js, PostgreSQL, n8n',
       tech: [
         { name: 'React', icon: SiReact },
-        { name: 'n8n Logic', icon: FaProjectDiagram },
         { name: 'Node.js', icon: SiNodedotjs },
-        { name: 'PostgreSQL', icon: SiPostgresql }
+        { name: 'PostgreSQL', icon: SiPostgresql },
+        { name: 'n8n', icon: FaProjectDiagram }
       ],
       image: FreelancerImg,
       github: 'https://github.com/SandidHajar',
@@ -319,27 +188,17 @@ export async function executeWorkflow(cvData: CVData) {
     {
       id: 'data-extractor',
       title: 'Data Extractor Premium',
-      shortImpact: "Instantly populates lead generation lists with a single click.",
-      businessImpact: "Eliminates hours of manual data entry for sales reps, scaling up outbound prospecting volume exponentially.",
-      badges: ["Web Extension", "B2B", "Production"],
-      tagline: 'Chrome Manifest V3 Extension for massive data extraction.',
+      description: 'Extension Chrome Manifest V3 pour la génération automatisée de leads B2B.',
       featured: true,
-      problem: 'B2B Outbound prospecting requires excessive manual tracking across domains.',
-      solution: 'Chrome extension parsing deep DOM trees to extract specific contextual leads.',
-      architecture: 'Manifest V3 leveraging stealthy Content Scripts and safe isolated execution.',
-      metrics: [
-        { label: 'Extraction', value: 'Speed' },
-        { label: 'Manifest', value: 'V3' },
-        { label: 'Export', value: 'CSV/Excel' }
+      impact: 'Plus de 1000 leads extraits par heure',
+      bullets: [
+        'Extraction sémantique d\'emails, téléphones et liens sociaux',
+        'Export instantané vers CSV/Excel pour les pipelines de vente',
+        'Exécution isolée sécurisée Manifest V3'
       ],
-      features: [
-        'Semantic extraction of emails and phones',
-        'Modern Glassmorphism interface',
-        'Instant export to Excel',
-        'Automatic detection of social links'
-      ],
+      stack: 'JavaScript (V3), Chrome APIs, TailwindCSS',
       tech: [
-        { name: 'JS V3', icon: SiJavascript },
+        { name: 'JavaScript', icon: SiJavascript },
         { name: 'Chrome API', icon: SiJavascript },
         { name: 'TailwindCSS', icon: SiTailwindcss }
       ],
@@ -348,52 +207,17 @@ export async function executeWorkflow(cvData: CVData) {
       demo: 'https://github.com/SandidHajar/data-extracting-extention'
     },
     {
-      id: 'automation-intel',
-      title: 'Automation Intelligence',
-      tagline: 'Tampermonkey scripts for cross-domain data import.',
-      featured: false,
-      problem: 'Data transfer between incompatible websites slows down repetitive form-filling processes.',
-      solution: 'An automation system using local storage to persist fictitious identities and intelligently inject them into forms.',
-      architecture: 'High-level scripts managing persistent data synchronization across multiple tabs and domains.',
-      metrics: [
-        { label: 'Workflow', value: '+90%' },
-        { label: 'Speed', value: 'Auto' },
-        { label: 'Security', value: 'Local' }
-      ],
-      features: [
-        'Secure cross-domain data transfer',
-        'Automatic filling of complex forms',
-        'Dynamic password generation',
-        'Visual progress notifications'
-      ],
-      tech: [
-        { name: 'JavaScript', icon: SiJavascript },
-        { name: 'DOM Logic', icon: HiShieldCheck },
-        { name: 'Persistence', icon: HiDatabase }
-      ],
-      image: AutomationImg,
-      github: 'https://github.com/SandidHajar/Import_Data',
-      demo: 'https://github.com/SandidHajar/Import_Data'
-    },
-    {
       id: 'ai-gen',
       title: 'AI Image Generator',
-      tagline: 'Creative app leveraging the Gemini Vision API.',
+      description: 'Application créative full-stack exploitant des modèles de vision de pointe.',
       featured: false,
-      problem: 'Creating custom visuals from text descriptions often requires complex and expensive tools.',
-      solution: 'A clean interface to transform prompts into unique designs, featuring a community gallery for sharing.',
-      architecture: 'Serverless application using Vercel and Supabase for immediate scalability and optimal responsiveness.',
-      metrics: [
-        { label: 'IA API', icon: FaBrain },
-        { label: 'Model', value: 'Gemini' },
-        { label: 'Cloud', value: 'Vercel' }
+      impact: 'Latence de génération inférieure à la seconde',
+      bullets: [
+        'Transformation Prompt-to-image via Gemini Vision API',
+        'Galerie communautaire avec partage en temps réel via Supabase',
+        'Gestion optimisée des coûts d\'API et limitation de débit'
       ],
-      features: [
-        'Image generation via text prompt',
-        'Persistent gallery via Supabase',
-        'Instant community sharing',
-        'API cost optimization'
-      ],
+      stack: 'React, Gemini API, Supabase, Vercel',
       tech: [
         { name: 'React', icon: SiReact },
         { name: 'Gemini API', icon: SiGooglecloud },
@@ -406,22 +230,15 @@ export async function executeWorkflow(cvData: CVData) {
     {
       id: 'cats-gallery',
       title: 'Cats Gallery Full-Stack',
-      tagline: 'Complete CRUD System with REST API and TiDB.',
+      description: 'Application CRUD haute performance démontrant l\'architecture de base de données.',
       featured: false,
-      problem: 'Demonstrate mastery of the full development lifecycle, from API design to database validation.',
-      solution: 'An interactive dashboard managing structured data, rigorously tested via Postman to ensure reliability.',
-      architecture: 'Distributed environment using TiDB Cloud to guarantee data integrity at scale.',
-      metrics: [
-        { label: 'Backend', value: 'Node/Express' },
-        { label: 'Testing', value: 'Postman' },
-        { label: 'SQL', value: 'TiDB' }
+      impact: 'Intégrité des données entièrement relationnelle',
+      bullets: [
+        'Cycle de vie CRUD complet avec endpoints REST sécurisés',
+        'Connexion SQL haute performance via TiDB Cloud',
+        'Suites de tests API rigoureuses via Postman'
       ],
-      features: [
-        'Complete and secure CRUD lifecycle',
-        'Endpoint testing via Postman',
-        'Modern responsive interface',
-        'High-performance Cloud SQL connection'
-      ],
+      stack: 'Node.js, Express, TiDB Cloud',
       tech: [
         { name: 'Node.js', icon: SiNodedotjs },
         { name: 'Express', icon: SiExpress },

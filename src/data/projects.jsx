@@ -2,7 +2,7 @@ import {
   SiReact, SiNodedotjs, SiPostgresql, SiPrisma,
   SiTailwindcss, SiTypescript, SiRedis, SiVite,
   SiJavascript, SiExpress, SiGooglecloud, SiSupabase,
-  SiLaravel, SiPhp, SiMysql, SiFramer
+  SiLaravel, SiPhp, SiMysql, SiFramer, SiFastapi
 } from 'react-icons/si';
 import { HiDatabase, HiShieldCheck, HiOutlineMail, HiLightningBolt } from 'react-icons/hi';
 import { FaBrain, FaProjectDiagram, FaLock, FaChartLine } from 'react-icons/fa';
@@ -13,9 +13,41 @@ import ExtractorImg from '../components/Aside/ProjectsImages/data-extractor-v2.p
 import AutomationImg from '../components/Aside/ProjectsImages/automation-v2.png';
 import ImgGenImg from '../components/Aside/ProjectsImages/ai-generator-img.png';
 import CatsImg from '../components/Aside/ProjectsImages/cats-gellery.jpg';
+import AiCvAnalyzerImg from '../components/Aside/ProjectsImages/ai-cv-analyzer.png';
 
 export const projects = {
   en: [
+    {
+      id: 'ai-cv-analyzer',
+      title: 'AI CV Analyzer SaaS',
+      description: 'Enterprise-grade SaaS platform for CV evaluation using a hybrid architecture (rule engine + Generative AI).',
+      featured: true,
+      problem: 'Manual CV screening is subjective, slow, and struggles to deeply analyze technical competencies at scale.',
+      solution: 'A hybrid analysis solution combining strict rule-based extraction with Generative AI to evaluate, rank, and provide real-time feedback.',
+      impact: 'Detailed technical feedback generated in under 10 seconds, reducing screening time by 90% with a monetizable SaaS model.',
+      bullets: [
+        'End-to-End Data Pipeline: PDF Parsing ➔ Contextual Prompt Engineering ➔ Async Processing (FastAPI) ➔ Dynamic Dashboard',
+        'Full SaaS Architecture: Secure Auth (JWT/Bcrypt), Serverless DB (NeonDB/PostgreSQL), and Freemium logic (5 analyses/day)',
+        'Hybrid AI Fusion Engine (Rule-based + Generative AI) for deep technical competency evaluation',
+        'Asynchronous request handling (Background Tasks) preventing UI blocking, with client-side polling',
+        'Ultra-modern UI/UX (Glassmorphism, Dark mode) with a conversion-oriented Landing Page'
+      ],
+      stack: 'React, FastAPI, PostgreSQL, SQLAlchemy, JWT',
+      tech: [
+        { name: 'React', icon: SiReact },
+        { name: 'FastAPI', icon: SiFastapi },
+        { name: 'PostgreSQL', icon: SiPostgresql },
+        { name: 'Open AI', icon: FaBrain }
+      ],
+      metrics: [
+        { label: 'Architecture', value: 'Hybrid AI' },
+        { label: 'Processing', value: 'Async' },
+        { label: 'Design', value: 'Glassmorphism' }
+      ],
+      image: AiCvAnalyzerImg,
+      github: 'https://github.com/SandidHajar',
+      demo: '#'
+    },
     {
       id: 'nexora',
       title: 'NEXORA — AI-Driven HR SaaS',
@@ -133,6 +165,37 @@ export const projects = {
     }
   ],
   fr: [
+    {
+      id: 'ai-cv-analyzer',
+      title: 'AI CV Analyzer SaaS',
+      description: 'Plateforme SaaS d\'évaluation de CV basée sur une architecture hybride (moteur de règles + IA générative).',
+      featured: true,
+      problem: 'Le tri manuel des CV est subjectif, chronophage et inefficace pour évaluer la profondeur technique à grande échelle.',
+      solution: 'Une solution d\'analyse hybride combinant extraction par règles et IA générative pour évaluer, classer et fournir un feedback en temps réel.',
+      impact: 'Feedback technique détaillé généré en moins de 10 secondes, réduisant de 90% le temps de pré-sélection avec un système SaaS monétisable.',
+      bullets: [
+        'Pipeline Data de bout en bout : Parsing PDF ➔ Prompt Engineering contextuel ➔ Traitement asynchrone (FastAPI) ➔ Dashboard interactif',
+        'Architecture SaaS complète : Authentification sécurisée (JWT/Bcrypt), Base de données Serverless (NeonDB/PostgreSQL) et logique freemium (5 analyses/jour)',
+        'Architecture hybride (moteur de règles + IA générative) pour une évaluation précise et objective des CV',
+        'Gestion asynchrone des requêtes (Background Tasks) évitant le blocage de l\'UI, avec mécanisme de polling',
+        'UI/UX ultra-moderne (Glassmorphism, Dark mode) et Landing Page orientée conversion'
+      ],
+      stack: 'React, FastAPI, PostgreSQL, SQLAlchemy, JWT',
+      tech: [
+        { name: 'React', icon: SiReact },
+        { name: 'FastAPI', icon: SiFastapi },
+        { name: 'PostgreSQL', icon: SiPostgresql },
+        { name: 'Open AI', icon: FaBrain }
+      ],
+      metrics: [
+        { label: 'Architecture', value: 'Hybride IA' },
+        { label: 'Traitement', value: 'Asynchrone' },
+        { label: 'Design', value: 'Glassmorphism' }
+      ],
+      image: AiCvAnalyzerImg,
+      github: 'https://github.com/SandidHajar/AI_CV_ANALYSER',
+      demo: 'https://ai-cv-analyser-zus6.vercel.app/'
+    },
     {
       id: 'nexora',
       title: 'NEXORA — SaaS RH Propulsé par l\'IA',

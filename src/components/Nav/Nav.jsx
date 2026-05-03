@@ -74,8 +74,8 @@ const Hero = () => {
             </a>
 
             <a
-              href="/hajar_sandid_cv.pdf"
-              download="hajar_sandid_cv.pdf"
+              href={t('hero.cvPath')}
+              download="Hajar_Sandid_CV.pdf"
               className="flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl border border-white/20 hover:border-violet-500/50 hover:bg-white/5 text-white font-bold transition-all group w-full sm:w-auto"
             >
               <HiDownload className="group-hover:-translate-y-0.5 transition-transform" size={18} />

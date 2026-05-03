@@ -24,7 +24,8 @@ export default {
       "design": { "label": "Design Système", "sub": "Architecture Clean" },
       "fullstack": { "label": "Full-Stack", "label2": "JavaScript • PHP", "sub": "Écosystème Moderne" },
       "security": { "label": "Sécurité", "sub": "Standards Industriels" }
-    }
+    },
+    "cvPath": "/Hajar_Sandid_Full_Stack_Developpeur_Cv.pdf"
   },
   "about": {
     "title1": "À propos de",

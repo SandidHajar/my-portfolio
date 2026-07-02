@@ -14,10 +14,10 @@ Welcome to my personal portfolio project. This is a modern, responsive, and high
 
 ## 🛠️ Tech Stack
 
-- **Frontend**: React.js, Tailwind CSS (or Vanilla CSS)
+- **Frontend**: Next.js, React, Tailwind CSS
 - **State Management**: React Hooks / Context API
-- **Icons & Graphics**: FontAwesome / Lucide React
-- **Deployment**: GitHub Pages / Vercel / Netlify
+- **Icons & Graphics**: React Icons
+- **Deployment**: Vercel / Netlify
 
 ## 🚀 Getting Started
 
@@ -36,7 +36,7 @@ npm install
 
 ### 3. Run the development server
 ```bash
-npm start
+npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
@@ -44,11 +44,12 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 ## 📁 Project Structure
 
 ```text
-src/
-├── components/   # Reusable UI components (Nav, Footer, Aside, etc.)
-├── assets/       # Images, fonts, and static files
-├── styles/       # CSS/Tailwind configuration
-└── App.js        # Main application component
+app/          # Next.js app router pages and global styles
+components/   # Reusable UI components
+context/      # Shared React context
+data/         # Project data
+i18n/         # Translation resources
+public/       # Static assets
 ```
 
 ## 📬 Contact Me

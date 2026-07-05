@@ -5,13 +5,20 @@ import { HiExternalLink } from 'react-icons/hi';
 import { FaGithub } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 import { projects } from '../../data/projects';
-import type { ProjectItem, Locale } from '../../lib/types';
-import type { StaticImageData } from 'next/image';
+import type { ManagedProjectItem, ProjectItem, Locale } from '../../lib/types';
+import { useSiteContent } from '../useSiteContent';
+
+function getProjectImageSrc(image: ProjectItem['image'] | ManagedProjectItem['image']) {
+  return typeof image === 'string' ? image : image.src;
+}
 
 export default function ProjectsGrid() {
   const { t, i18n } = useTranslation();
+  const content = useSiteContent();
   const lang = (i18n.language.split('-')[0] === 'fr' ? 'fr' : 'en') as Locale;
-  const displayProjects = (projects[lang] || projects.en).filter((project) => project.id !== 'nexora').slice(0, 4);
+  const displayProjects = [...(projects[lang] || projects.en), ...(content?.extraProjects?.[lang] ?? [])]
+    .filter((project) => project.id !== 'nexora')
+    .slice(0, 4);
 
   return (
     <section id="work" className="section-shell">
@@ -39,7 +46,7 @@ export default function ProjectsGrid() {
         </div>
 
         <div className="grid grid-cols-1 gap-7 md:grid-cols-2">
-          {displayProjects.map((project: ProjectItem, index: number) => (
+          {displayProjects.map((project: ProjectItem | ManagedProjectItem, index: number) => (
             <motion.div
               key={project.id}
               initial={{ opacity: 0, y: 20 }}
@@ -50,7 +57,7 @@ export default function ProjectsGrid() {
               <article className="case-study flex h-full flex-col transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_18px_40px_rgba(0,0,0,0.12)]">
                 <div className="project-media">
                   <img
-                    src={(project.image as StaticImageData).src}
+                    src={getProjectImageSrc(project.image)}
                     alt={project.title}
                     className="case-study-image min-h-[240px] md:min-h-[280px]"
                   />
@@ -59,30 +66,36 @@ export default function ProjectsGrid() {
                 <div className="flex flex-1 flex-col p-6">
                   <div className="mb-5 flex items-start justify-between gap-4">
                     <h3 className="text-xl font-semibold text-white">{project.title}</h3>
-                    <span className="shrink-0 border border-emerald-400/15 bg-emerald-400/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-emerald-300">
-                      {project.impact}
-                    </span>
+                    {!!project.impact && (
+                      <span className="shrink-0 border border-emerald-400/15 bg-emerald-400/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-emerald-300">
+                        {project.impact}
+                      </span>
+                    )}
                   </div>
 
                   <p className="mb-6 text-sm leading-7 text-slate-300">{project.description}</p>
 
-                  <div className="mb-7 grid gap-2">
-                    {project.bullets.slice(0, 2).map((bullet, i) => (
-                      <p key={i} className="border-l-2 border-[var(--accent)] py-1 pl-4 text-sm leading-6 text-slate-300">
-                        {bullet}
-                      </p>
-                    ))}
-                  </div>
+                  {!!project.bullets?.length && (
+                    <div className="mb-7 grid gap-2">
+                      {project.bullets.slice(0, 2).map((bullet, i) => (
+                        <p key={i} className="border-l-2 border-[var(--accent)] py-1 pl-4 text-sm leading-6 text-slate-300">
+                          {bullet}
+                        </p>
+                      ))}
+                    </div>
+                  )}
 
                   <div className="mt-auto border-t border-white/10 pt-5">
-                    <div className="mb-5 flex items-start justify-between gap-4">
-                      <span className="pt-1 text-[10px] font-bold uppercase tracking-[0.16em] text-slate-500">
-                        {t('projects.stackLabel')}
-                      </span>
-                      <span className="max-w-[70%] text-right font-mono text-[12px] leading-6 text-[var(--accent)]">
-                        {project.stack}
-                      </span>
-                    </div>
+                    {!!project.stack && (
+                      <div className="mb-5 flex items-start justify-between gap-4">
+                        <span className="pt-1 text-[10px] font-bold uppercase tracking-[0.16em] text-slate-500">
+                          {t('projects.stackLabel')}
+                        </span>
+                        <span className="max-w-[70%] text-right font-mono text-[12px] leading-6 text-[var(--accent)]">
+                          {project.stack}
+                        </span>
+                      </div>
+                    )}
 
                     <div className="flex gap-3">
                       {project.demo && (

@@ -5,13 +5,21 @@ import { HiOutlineExternalLink, HiLightningBolt } from 'react-icons/hi';
 import { FaGithub } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 import { projects } from '../../data/projects';
-import type { Locale, ProjectItem } from '../../lib/types';
-import type { StaticImageData } from 'next/image';
+import type { Locale, ManagedProjectItem, ProjectItem } from '../../lib/types';
+import { useSiteContent } from '../useSiteContent';
+
+function getProjectImageSrc(image: ProjectItem['image'] | ManagedProjectItem['image']) {
+  return typeof image === 'string' ? image : image.src;
+}
 
 export default function FeaturedProject() {
   const { t, i18n } = useTranslation();
+  const content = useSiteContent();
   const lang = (i18n.language.split('-')[0] === 'fr' ? 'fr' : 'en') as Locale;
-  const project = (projects[lang] || projects.en).find((p) => p.id === 'nexora') as ProjectItem | undefined;
+  const project =
+    [...(projects[lang] || projects.en), ...(content?.extraProjects?.[lang] ?? [])].find(
+      (p) => p.id === 'nexora'
+    ) as ProjectItem | ManagedProjectItem | undefined;
 
   if (!project) return null;
 
@@ -43,7 +51,7 @@ export default function FeaturedProject() {
           <div className="grid lg:grid-cols-[1.08fr_0.92fr]">
             <div className="project-media relative">
               <img
-                src={(project.image as StaticImageData).src}
+                src={getProjectImageSrc(project.image)}
                 alt={project.title}
                 className="case-study-image h-full min-h-[360px] lg:min-h-[620px]"
               />
@@ -59,7 +67,7 @@ export default function FeaturedProject() {
                   <h4 className="mb-3 text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500">
                     {t('featured.problem')}
                   </h4>
-                  <p className="text-lg leading-8 text-white">{project.problem}</p>
+                  <p className="text-lg leading-8 text-white">{project.problem ?? project.description}</p>
                 </div>
 
                 <div className="border-b border-white/10 pb-7">
@@ -87,7 +95,7 @@ export default function FeaturedProject() {
                     {t('featured.stack')}
                   </h4>
                   <p className="border border-white/8 bg-black/10 px-4 py-4 font-mono text-sm text-[var(--accent)]">
-                    {project.stack}
+                    {project.stack ?? 'Project stack'}
                   </p>
                 </div>
 

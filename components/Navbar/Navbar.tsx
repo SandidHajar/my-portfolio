@@ -54,14 +54,14 @@ export default function Navbar() {
   );
 
   return (
-    <nav className={`fixed left-0 top-0 z-[100] w-full transition-all duration-300 ${isScrolled ? 'py-4' : 'py-5'}`}>
+    <nav className={`fixed left-0 top-0 z-100 w-full transition-all duration-300 ${isScrolled ? 'py-4' : 'py-5'}`}>
       <div className="container-premium">
         <div
           className={`flex items-center justify-between rounded-xl px-5 py-3 transition-all duration-500 ${
             isScrolled ? 'glass border-white/10 shadow-2xl' : 'surface-panel border-white/8'
           }`}
         >
-          <a href="/" className="group flex min-h-[44px] items-center gap-3">
+          <a href="/" className="group flex min-h-11 items-center gap-3">
             <div className="h-10 w-10 overflow-hidden rounded-lg border border-white/10 bg-white/5 shadow-lg transition-transform duration-300 group-hover:scale-[1.04]">
               <img src="/assets/hs-brand-icon.png" alt="HS Logo" className="h-full w-full object-cover" />
             </div>
@@ -86,7 +86,7 @@ export default function Navbar() {
           </div>
 
           <div className="hidden items-center gap-3 md:flex">
-            <div className="rounded-lg border border-white/10 bg-white/[0.03] p-1">
+            <div className="rounded-lg border border-white/10 bg-white/3 p-1">
               <LangSwitcher />
             </div>
             <ThemeToggle />
@@ -94,7 +94,7 @@ export default function Navbar() {
               href="https://github.com/SandidHajar"
               target="_blank"
               rel="noreferrer"
-              className="flex h-11 w-11 items-center justify-center rounded-lg border border-white/10 bg-white/[0.03] text-slate-400 transition-colors hover:text-white"
+              className="flex h-11 w-11 items-center justify-center rounded-lg border border-white/10 bg-white/3 text-slate-400 transition-colors hover:text-white"
             >
               <FaGithub size={18} />
             </a>
@@ -102,19 +102,19 @@ export default function Navbar() {
               href="https://www.linkedin.com/in/hajar-sandid-13656b386/"
               target="_blank"
               rel="noreferrer"
-              className="flex h-11 w-11 items-center justify-center rounded-lg border border-white/10 bg-white/[0.03] text-slate-400 transition-colors hover:text-white"
+              className="flex h-11 w-11 items-center justify-center rounded-lg border border-white/10 bg-white/3 text-slate-400 transition-colors hover:text-white"
             >
               <FaLinkedin size={18} />
             </a>
           </div>
 
           <div className="flex items-center gap-2 md:hidden">
-            <div className="rounded-lg border border-white/10 bg-white/[0.03] p-1">
+            <div className="rounded-lg border border-white/10 bg-white/3 p-1">
               <LangSwitcher />
             </div>
             <ThemeToggle />
             <button
-              className="flex h-11 w-11 items-center justify-center rounded-lg border border-white/10 bg-white/[0.03] text-slate-400 transition-colors hover:text-white"
+              className="flex h-11 w-11 items-center justify-center rounded-lg border border-white/10 bg-white/3 text-slate-400 transition-colors hover:text-white"
               onClick={() => setMobileMenuOpen((value) => !value)}
             >
               {mobileMenuOpen ? <HiX size={24} /> : <HiMenuAlt3 size={24} />}
@@ -148,7 +148,7 @@ export default function Navbar() {
                   href="https://github.com/SandidHajar"
                   target="_blank"
                   rel="noreferrer"
-                  className="glass flex min-h-[48px] items-center justify-center rounded-lg text-slate-300"
+                  className="glass flex min-h-12 items-center justify-center rounded-lg text-slate-300"
                 >
                   <FaGithub size={20} />
                 </a>
@@ -156,7 +156,7 @@ export default function Navbar() {
                   href="https://www.linkedin.com/in/hajar-sandid-13656b386/"
                   target="_blank"
                   rel="noreferrer"
-                  className="glass flex min-h-[48px] items-center justify-center rounded-lg text-slate-300"
+                  className="glass flex min-h-12 items-center justify-center rounded-lg text-slate-300"
                 >
                   <FaLinkedin size={20} />
                 </a>
@@ -168,3 +168,4 @@ export default function Navbar() {
     </nav>
   );
 }
+

@@ -34,6 +34,22 @@ export type ProjectItem = {
   demo: string;
 };
 
+export type ManagedProjectItem = {
+  id: string;
+  title: string;
+  description: string;
+  image: string;
+  github: string;
+  demo: string;
+  featured?: boolean;
+  problem?: string;
+  solution?: string;
+  impact?: string;
+  bullets?: string[];
+  stack?: string;
+  metrics?: MetricItem[];
+};
+
 export type EducationItem = {
   title: string;
   school: string;
@@ -41,4 +57,14 @@ export type EducationItem = {
   location: string;
   description: string;
   highlights: string[];
+};
+
+export type ManagedEducationItem = {
+  id: string;
+  title: string;
+  school: string;
+  date: string;
+  location: string;
+  description: string;
+  highlights?: string[];
 };

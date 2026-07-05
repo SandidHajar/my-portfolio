@@ -3,9 +3,11 @@
 import { motion } from 'framer-motion';
 import { HiArrowNarrowRight, HiCode, HiDownload, HiOutlineDesktopComputer, HiSparkles } from 'react-icons/hi';
 import { useTranslation } from 'react-i18next';
+import { useSiteContent } from '../useSiteContent';
 
 export default function Hero() {
   const { t } = useTranslation();
+  const content = useSiteContent();
   const proofCards = t('hero.proofCards', { returnObjects: true }) as Array<{ label: string; sub: string }>;
 
   return (
@@ -59,7 +61,7 @@ export default function Hero() {
                 <HiArrowNarrowRight className="transition-transform group-hover:translate-x-1" />
               </a>
 
-              <a href={t('hero.cvPath')} download="Hajar_Sandid_CV.pdf" className="button-secondary group w-full sm:w-auto">
+              <a href={content?.cvUrl ?? t('hero.cvPath')} download="Hajar_Sandid_CV.pdf" className="button-secondary group w-full sm:w-auto">
                 <HiDownload size={18} className="transition-transform group-hover:-translate-y-0.5" />
                 {t('hero.btnCV')}
               </a>

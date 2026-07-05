@@ -17,7 +17,7 @@ Welcome to my personal portfolio project. This is a modern, responsive, and high
 - **Frontend**: Next.js, React, Tailwind CSS
 - **State Management**: React Hooks / Context API
 - **Icons & Graphics**: React Icons
-- **Deployment**: Vercel / Netlify
+- **Deployment**: Vercel 
 
 ## 🚀 Getting Started
 
